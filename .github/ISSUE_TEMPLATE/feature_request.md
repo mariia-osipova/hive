@@ -1,22 +1,30 @@
 ---
-name: Feature request
-about: Suggest an idea for improving this project
-title: '[Feature]: '
-labels: enhancement
-assignees: []
+name: " Feature Request"
+about: Create a new ticket for a new feature request
+title: " [REQUEST] - <title>"
+labels: question
 ---
 
+## Start Date
+Start of development
+
+## Implementation PR
+Pull request used
+
+## Reference Issues
+Common issues
+
 ## Summary
-A short description of the feature you want.
+Provide a brief explanation of the feature.
 
-## Why is this needed?
-Describe the problem or pain point and why this feature is useful.
+## Basic Example
+Indicate here some basic examples of your feature.
 
-## Proposed solution
-Describe how you imagine this feature should work.
+## Drawbacks
+What are the drawbacks/impacts of your feature request?
 
-## Alternatives considered
-List alternatives you considered and why they are not ideal.
+## Unresolved Questions
+What questions still remain unresolved?
 
-## Additional context
-Attach screenshots, mockups, links, or any other relevant details.
+## Additional information
+Add any additional information that you think is important for your feature request.
