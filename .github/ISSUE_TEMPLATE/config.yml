@@ -1,0 +1,6 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Security issue
+    url: https://github.com/<owner>/<repo>/security/policy
+    about: Please report vulnerabilities privately via your project's security policy.

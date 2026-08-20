@@ -1,0 +1,64 @@
+name: Bug report
+description: Create a report to help us improve
+title: '[Bug]: '
+labels: ['bug']
+description: Use this template to report something that is broken or not working as expected.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this issue. Please provide as much detail as possible.
+
+  - type: input
+    id: reproduction_url
+    attributes:
+      label: Reproduction URL
+      description: Link to the page, environment, or page state where the issue happens.
+      placeholder: https://...
+
+  - type: textarea
+    id: summary
+    validations:
+      required: true
+    attributes:
+      label: What happened?
+      description: Briefly describe the bug and what you expected to happen.
+      placeholder: Describe the issue clearly and concisely.
+
+  - type: textarea
+    id: steps
+    validations:
+      required: true
+    attributes:
+      label: Steps to reproduce
+      description: Provide numbered steps so we can reproduce it.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include versions and platform details.
+      placeholder: |
+        OS: ...
+        Browser: ...
+        Version: ...
+        Device: ...
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / errors
+      description: Paste relevant logs or stack traces if available.
+      render: shell
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmations
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+        - label: I can provide additional information if needed.
