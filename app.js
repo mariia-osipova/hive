@@ -109,7 +109,7 @@ function renderHand(color) {
 
     const count = document.createElement("span");
     count.className = "piece-count";
-    count.textContent = `${hands[color][id]}/${initial}`;
+    count.textContent = `x${hands[color][id]}`;
     button.append(count);
     button.addEventListener("click", () => selectHand(id));
     root.append(button);
