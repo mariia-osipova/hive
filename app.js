@@ -18,12 +18,16 @@ const hands = { white: emptyHand(), black: emptyHand() };
 const imageCache = new Map();
 const sound = document.querySelector("#placementSound");
 
-function asset(id, color) { const piece = PIECES.find(([pieceId]) => pieceId === id); return `img/insects/${color}/${piece[2]}-${color}-638-550.png`; }
+function asset(id, color) {
+  const piece = PIECES.find(([pieceId]) => pieceId === id);
+  return new URL(`img/insects/${color}/${piece[2]}-${color}-638-550.png`, import.meta.url).href;
+}
 function imageFor(id, color) {
   const src = asset(id, color);
   if (!imageCache.has(src)) {
     const image = new Image();
     image.onload = () => draw();
+    image.onerror = () => console.error(`Could not load piece image: ${src}`);
     image.src = src;
     imageCache.set(src, image);
   }
