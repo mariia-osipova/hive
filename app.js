@@ -12,7 +12,7 @@ const same = (a, b) => a[0] === b[0] && a[1] === b[1];
 const neighbors = (hex) => DIRS.map((dir) => add(hex, dir));
 const canvas = document.querySelector("#board");
 const ctx = canvas.getContext("2d");
-const state = { board: new Map(), turn: "white", turnNumber: 1, lastMoved: null, selectedHand: null, selectedHex: null, targets: new Set(), message: "Choose a piece from your hand" };
+const state = { board: new Map(), turn: "white", turnNumber: 1, lastMoved: null, selectedHand: null, selectedHex: null, pendingTargets: new Set(), targets: new Set(), message: "Choose a piece from your hand" };
 const emptyHand = () => Object.fromEntries(PIECES.map(([id, , , count]) => [id, count]));
 const hands = { white: emptyHand(), black: emptyHand() };
 const imageCache = new Map();
@@ -68,11 +68,27 @@ function placementTargets() {
 }
 function availableTypes() { const personalTurn = Math.ceil(state.turnNumber / 2), hand = hands[state.turn]; return PIECES.filter(([id]) => hand[id] > 0 && !(personalTurn >= 4 && hand.queen > 0 && id !== "queen")); }
 function selectHand(type) { if (!availableTypes().some(([id]) => id === type)) return; state.selectedHand = type; state.selectedHex = null; state.targets = new Set(placementTargets().map((hex) => key(...hex))); state.message = `Place ${PIECES.find(([id]) => id === type)[1]}`; render(); }
-function selectBoard(hex) { const piece = top(hex); if (!piece || piece.color !== state.turn || state.lastMoved === key(...hex) || hands[state.turn].queen > 0) return; state.selectedHex = hex; state.selectedHand = null; state.targets = new Set(movementTargets(hex, piece).map((target) => key(...target))); state.message = state.targets.size ? `Move ${piece.type}` : "This piece has no legal destination"; render(); }
+function selectBoard(hex) { const piece = top(hex); if (!piece || piece.color !== state.turn || state.lastMoved === key(...hex) || hands[state.turn].queen > 0) return; state.selectedHex = hex; state.selectedHand = null; state.pendingTargets = new Set(movementTargets(hex, piece).map((target) => key(...target))); state.targets = new Set(); state.message = state.pendingTargets.size ? `Selected ${piece.type}` : "This piece has no legal destination"; render(); }
+function chooseMove() { state.targets = new Set(state.pendingTargets); state.message = "Choose a green destination"; render(); }
 function playSound() { if (!sound.src) return; sound.currentTime = 0; sound.play().catch(() => {}); }
 function moveTo(hex) { const value = key(...hex); if (!state.targets.has(value)) { state.message = "Choose a highlighted hex"; render(); return; } if (state.selectedHand) { state.board.set(value, [{ type: state.selectedHand, color: state.turn }]); hands[state.turn][state.selectedHand]--; playSound(); } else { const stack = state.board.get(key(...state.selectedHex)); const piece = stack.pop(); if (!stack.length) state.board.delete(key(...state.selectedHex)); state.board.set(value, [...(state.board.get(value) || []), piece]); } state.lastMoved = value; state.turn = state.turn === "white" ? "black" : "white"; state.turnNumber++; state.selectedHand = null; state.selectedHex = null; state.targets = new Set(); state.message = "Choose a piece from your hand"; render(); }
 function renderHand(color) { const root = document.querySelector(`#${color}Hand`); root.innerHTML = ""; for (const [id, name, , initial] of PIECES) { const button = document.createElement("button"); button.className = `piece-card ${state.selectedHand === id && state.turn === color ? "selected" : ""}`; button.type = "button"; button.disabled = color !== state.turn || hands[color][id] === 0; button.innerHTML = `<img src="${asset(id, color)}" alt=""><span class="piece-name">${name}</span><span class="piece-count">${hands[color][id]}/${initial}</span>`; button.addEventListener("click", () => selectHand(id)); root.append(button); } }
 function render() { draw(); renderHand("white"); renderHand("black"); document.querySelector("#turnReadout").innerHTML = `${state.turn[0].toUpperCase() + state.turn.slice(1)} to move <span>${String(state.turnNumber).padStart(2, "0")}</span>`; document.querySelector("#statusText").textContent = state.message; document.querySelector("#hintText").textContent = state.selectedHand ? "Click a green hex to place the piece." : state.selectedHex ? "Click a green hex to move the selected piece." : "Select a tile from the hand, then place it on a highlighted hex."; document.querySelector("#whiteScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "white").length; document.querySelector("#blackScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "black").length; document.querySelector("#boardEmpty").classList.toggle("hidden", state.board.size > 0); }
+
+function render() {
+  draw();
+  renderHand("white");
+  renderHand("black");
+  document.querySelector("#turnReadout").textContent = `${state.turn[0].toUpperCase() + state.turn.slice(1)}'s turn -- Turn ${state.turnNumber}`;
+  document.querySelector("#statusText").textContent = state.message;
+  document.querySelector("#hintText").textContent = state.selectedHand ? "Click a green hex to place the piece." : state.selectedHex ? "Choose Move, then click a green hex." : "Select a tile from the hand, then place it on a highlighted hex.";
+  document.querySelector("#whiteScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "white").length;
+  document.querySelector("#blackScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "black").length;
+  const actionMenu = document.querySelector("#actionMenu");
+  actionMenu.innerHTML = state.selectedHex && state.pendingTargets.size ? '<button type="button" title="Move">Move</button>' : "";
+  const moveButton = actionMenu.querySelector("button");
+  if (moveButton) moveButton.addEventListener("click", chooseMove);
+}
 
 canvas.addEventListener("click", (event) => { const { rect, size, center } = geometry(), point = [event.clientX - rect.left, event.clientY - rect.top], hex = pixelToAxial(point, size, center); if (state.targets.has(key(...hex))) moveTo(hex); else if (occupied(hex)) selectBoard(hex); });
 document.querySelector("#resetButton").addEventListener("click", () => { state.board.clear(); state.turn = "white"; state.turnNumber = 1; state.lastMoved = null; state.selectedHand = null; state.selectedHex = null; state.targets = new Set(); Object.assign(hands.white, emptyHand()); Object.assign(hands.black, emptyHand()); state.message = "Choose a piece from your hand"; render(); });
