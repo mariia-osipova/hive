@@ -18,16 +18,16 @@
       <button class="reset-button" id="resetButton" type="button">New game</button>
     </header>
     <section class="play-layout">
-      <aside class="side-panel white-panel"><div class="player-heading"><span class="player-dot white-dot"></span><span>White</span><strong id="whiteScore">0</strong></div><div class="hand" id="whiteHand"></div></aside>
+      <aside class="side-panel white-panel"><div class="player-heading"><span class="player-dot white-dot"></span><span>White</span><strong id="whiteScore">0</strong></div><div class="hand" id="whiteHand"><div class="hand-fallback" aria-hidden="true"><img src="/hive/img/insects/white/fish-white-638-550.png" alt=""><img src="/hive/img/insects/white/spider-white-638-550.png" alt=""><img src="/hive/img/insects/white/ant-white-638-550.png" alt=""><img src="/hive/img/insects/white/mosquito-white-638-550.png" alt=""><img src="/hive/img/insects/white/grasshopper-white-638-550.png" alt=""><img src="/hive/img/insects/white/stag-beetle-white-638-550.png" alt=""><img src="/hive/img/insects/white/ladybug-white-638-550.png" alt=""><img src="/hive/img/insects/white/pillbug-white-638-550.png" alt=""></div></div></aside>
       <section class="board-stage" aria-label="Hive board">
         <div class="board-toolbar"><div><span class="status-kicker">CURRENT TURN</span><strong id="statusText">Choose a piece from your hand</strong></div><div class="legend"><span class="legend-dot legal-dot"></span> legal destination</div></div>
         <div class="board-wrap"><canvas id="board" aria-label="Interactive Hive board"></canvas><div class="board-empty" id="boardEmpty">Start the hive<br /><span>Place your first piece at the center.</span></div></div>
         <p class="hint" id="hintText">Select a tile from the hand, then place it on a highlighted hex.</p>
       </section>
-      <aside class="side-panel black-panel"><div class="player-heading"><span class="player-dot black-dot"></span><span>Black</span><strong id="blackScore">0</strong></div><div class="hand" id="blackHand"></div></aside>
+      <aside class="side-panel black-panel"><div class="player-heading"><span class="player-dot black-dot"></span><span>Black</span><strong id="blackScore">0</strong></div><div class="hand" id="blackHand"><div class="hand-fallback" aria-hidden="true"><img src="/hive/img/insects/black/fish-black-638-550.png" alt=""><img src="/hive/img/insects/black/spider-black-638-550.png" alt=""><img src="/hive/img/insects/black/ant-black-638-550.png" alt=""><img src="/hive/img/insects/black/mosquito-black-638-550.png" alt=""><img src="/hive/img/insects/black/grasshopper-black-638-550.png" alt=""><img src="/hive/img/insects/black/stag-beetle-black-638-550.png" alt=""><img src="/hive/img/insects/black/ladybug-black-638-550.png" alt=""><img src="/hive/img/insects/black/pillbug-black-638-550.png" alt=""></div></div></aside>
     </section>
   </main>
   <audio id="placementSound" preload="auto" src="sounds/ElevenLabs_satisfying_card_flip_asmr.mp3"></audio>
-  <script src="app.js?v=8" type="module"></script>
+  <script src="app.js?v=9" type="module"></script>
 </body>
 </html>
