@@ -8,3 +8,9 @@
 @media(max-width:900px){:root{--panel:150px}.piece-card{grid-template-columns:58px 1fr;height:66px}.piece-card img{width:58px;height:58px}.piece-count{font-size:18px}.turn-readout{font-size:18px}}
 .action-menu{position:absolute;right:280px;top:0;height:64px;display:flex;align-items:center;gap:20px}.action-menu button{width:44px;height:44px;border:2px solid #ebe4d2;border-radius:50%;color:#ebe4d2;background:#5a564d;cursor:pointer;font:14px HiveSans,Arial}.action-menu button:hover{background:#726b5f}.board-empty{display:none!important}
 .hand-fallback{display:grid;gap:0}.hand-fallback img{display:block;width:68px;height:68px;object-fit:contain}
+.side-panel{overflow:hidden;padding:10px 8px 8px}
+.hand{height:calc(100vh - 82px);min-height:0;grid-template-rows:repeat(8,minmax(0,1fr));gap:2px}
+.piece-card{grid-template-columns:minmax(0,1fr) auto;gap:3px;height:100%;min-height:0;padding:1px}
+.piece-card img,.hand-fallback img{width:100%;height:100%;max-width:68px;max-height:68px;object-fit:contain}
+.hand-fallback{display:contents}
+.piece-count{font-size:clamp(13px,3vh,22px);line-height:1}
