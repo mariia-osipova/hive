@@ -85,7 +85,36 @@ function selectBoard(hex) { const piece = top(hex); if (!piece || piece.color !=
 function chooseMove() { state.targets = new Set(state.pendingTargets); state.message = "Choose a green destination"; render(); }
 function playSound() { if (!sound.src) return; sound.currentTime = 0; sound.play().catch(() => {}); }
 function moveTo(hex) { const value = key(...hex); if (!state.targets.has(value)) { state.message = "Choose a highlighted hex"; render(); return; } if (state.selectedHand) { state.board.set(value, [{ type: state.selectedHand, color: state.turn }]); hands[state.turn][state.selectedHand]--; playSound(); } else { const stack = state.board.get(key(...state.selectedHex)); const piece = stack.pop(); if (!stack.length) state.board.delete(key(...state.selectedHex)); state.board.set(value, [...(state.board.get(value) || []), piece]); } state.lastMoved = value; state.turn = state.turn === "white" ? "black" : "white"; state.turnNumber++; state.selectedHand = null; state.selectedHex = null; state.targets = new Set(); state.message = "Choose a piece from your hand"; render(); }
-function renderHand(color) { const root = document.querySelector(`#${color}Hand`); root.innerHTML = ""; for (const [id, name, , initial] of PIECES) { const button = document.createElement("button"); button.className = `piece-card ${state.selectedHand === id && state.turn === color ? "selected" : ""}`; button.type = "button"; button.disabled = color !== state.turn || hands[color][id] === 0; button.innerHTML = `<img src="${asset(id, color)}" alt=""><span class="piece-name">${name}</span><span class="piece-count">${hands[color][id]}/${initial}</span>`; button.addEventListener("click", () => selectHand(id)); root.append(button); } }
+function renderHand(color) {
+  const root = document.querySelector(`#${color}Hand`);
+  root.replaceChildren();
+  for (const [id, name, , initial] of PIECES) {
+    const button = document.createElement("button");
+    button.className = `piece-card ${state.selectedHand === id && state.turn === color ? "selected" : ""}`;
+    button.type = "button";
+    button.disabled = color !== state.turn || hands[color][id] === 0;
+
+    const image = document.createElement("img");
+    image.src = asset(id, color);
+    image.alt = name;
+    image.width = 68;
+    image.height = 68;
+    image.onerror = () => console.error(`Could not load hand image: ${image.src}`);
+    button.append(image);
+
+    const label = document.createElement("span");
+    label.className = "piece-name";
+    label.textContent = name;
+    button.append(label);
+
+    const count = document.createElement("span");
+    count.className = "piece-count";
+    count.textContent = `${hands[color][id]}/${initial}`;
+    button.append(count);
+    button.addEventListener("click", () => selectHand(id));
+    root.append(button);
+  }
+}
 function render() { draw(); renderHand("white"); renderHand("black"); document.querySelector("#turnReadout").innerHTML = `${state.turn[0].toUpperCase() + state.turn.slice(1)} to move <span>${String(state.turnNumber).padStart(2, "0")}</span>`; document.querySelector("#statusText").textContent = state.message; document.querySelector("#hintText").textContent = state.selectedHand ? "Click a green hex to place the piece." : state.selectedHex ? "Click a green hex to move the selected piece." : "Select a tile from the hand, then place it on a highlighted hex."; document.querySelector("#whiteScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "white").length; document.querySelector("#blackScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "black").length; document.querySelector("#boardEmpty").classList.toggle("hidden", state.board.size > 0); }
 
 function render() {
