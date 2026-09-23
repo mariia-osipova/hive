@@ -22,5 +22,5 @@
 .black-panel .piece-card img,.black-panel .hand-fallback img{left:auto;right:56px;transform:translate(50%,-50%)}
 .black-panel .piece-count{left:auto;right:126px;text-align:right}
 .brand-lockup,.reset-button{display:none}
-.hand-fallback{display:grid;width:100%;height:100%;grid-template-rows:repeat(8,minmax(0,1fr));gap:0}
+.hand-fallback{display:grid;grid-row:1 / -1;width:100%;height:100%;grid-template-rows:repeat(8,minmax(0,1fr));gap:0}
 .hand-fallback img{position:static;width:min(68px,8vh);height:min(59px,7vh);max-width:none;max-height:none;justify-self:center;align-self:center;transform:none}
