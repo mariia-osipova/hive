@@ -118,9 +118,9 @@ function renderHand(color) {
 function render() { draw(); renderHand("white"); renderHand("black"); document.querySelector("#turnReadout").innerHTML = `${state.turn[0].toUpperCase() + state.turn.slice(1)} to move <span>${String(state.turnNumber).padStart(2, "0")}</span>`; document.querySelector("#statusText").textContent = state.message; document.querySelector("#hintText").textContent = state.selectedHand ? "Click a green hex to place the piece." : state.selectedHex ? "Click a green hex to move the selected piece." : "Select a tile from the hand, then place it on a highlighted hex."; document.querySelector("#whiteScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "white").length; document.querySelector("#blackScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "black").length; document.querySelector("#boardEmpty").classList.toggle("hidden", state.board.size > 0); }
 
 function render() {
-  draw();
   renderHand("white");
   renderHand("black");
+  draw();
   document.querySelector("#turnReadout").textContent = `${state.turn[0].toUpperCase() + state.turn.slice(1)}'s turn -- Turn ${state.turnNumber}`;
   document.querySelector("#statusText").textContent = state.message;
   document.querySelector("#hintText").textContent = state.selectedHand ? "Click a green hex to place the piece." : state.selectedHex ? "Choose Move, then click a green hex." : "Select a tile from the hand, then place it on a highlighted hex.";
