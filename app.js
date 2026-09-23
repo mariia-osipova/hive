@@ -19,7 +19,16 @@ const imageCache = new Map();
 const sound = document.querySelector("#placementSound");
 
 function asset(id, color) { const piece = PIECES.find(([pieceId]) => pieceId === id); return `img/insects/${color}/${piece[2]}-${color}-638-550.png`; }
-function imageFor(id, color) { const src = asset(id, color); if (!imageCache.has(src)) { const image = new Image(); image.src = src; imageCache.set(src, image); } return imageCache.get(src); }
+function imageFor(id, color) {
+  const src = asset(id, color);
+  if (!imageCache.has(src)) {
+    const image = new Image();
+    image.onload = () => draw();
+    image.src = src;
+    imageCache.set(src, image);
+  }
+  return imageCache.get(src);
+}
 function occupied(hex) { return state.board.has(key(...hex)); }
 function top(hex) { const stack = state.board.get(key(...hex)); return stack?.at(-1) ?? null; }
 
