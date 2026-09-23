@@ -21,3 +21,4 @@
 .piece-count{position:absolute;top:50%;left:126px;transform:translateY(-50%);font-size:min(22px,3vh);white-space:nowrap}
 .black-panel .piece-card img,.black-panel .hand-fallback img{left:auto;right:56px;transform:translate(50%,-50%)}
 .black-panel .piece-count{left:auto;right:126px;text-align:right}
+.brand-lockup,.reset-button{display:none}
