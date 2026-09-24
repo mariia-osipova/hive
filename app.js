@@ -120,7 +120,38 @@ function fromPixel(point, boardLayout) {
 function hexPath(point, size) { const path = new Path2D(); for (let i = 0; i < 6; i++) { const angle = Math.PI / 3 * i + Math.PI / 6, x = point[0] + size * Math.cos(angle), y = point[1] + size * .862 * Math.sin(angle); i ? path.lineTo(x, y) : path.moveTo(x, y); } path.closePath(); return path; }
 const imageCache = new Map();
 function imageFor(type, color) { const src = asset(type, color); if (!imageCache.has(src)) { const image = new Image(); image.onload = draw; image.src = src; imageCache.set(src, image); } return imageCache.get(src); }
-function draw() { const boardLayout = layout(), { rect, size } = boardLayout, dpr = window.devicePixelRatio || 1; const stage = document.querySelector(".board-stage"); if (stage) { stage.style.backgroundSize = `${2112 * boardLayout.scale}px ${2464 * boardLayout.scale}px`; stage.style.backgroundPosition = `${boardLayout.origin[0] - rect.left - 527.5 * boardLayout.scale}px ${boardLayout.origin[1] - rect.top - 307.5 * boardLayout.scale}px`; } canvas.width = rect.width * dpr; canvas.height = rect.height * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, rect.width, rect.height); const targetKeys = new Set(state.candidates.map(move => key(...destination(move)))); for (const hex of boardCells()) { const globalPoint = toPixel(hex, boardLayout), point = [globalPoint[0] - rect.left, globalPoint[1] - rect.top], value = key(...hex), path = hexPath(point, size - 2); ctx.fillStyle = targetKeys.has(value) ? "rgba(54,225,120,.38)" : "rgba(213,164,154,.48)"; ctx.fill(path); ctx.strokeStyle = targetKeys.has(value) ? "#1cd768" : "rgba(142,80,75,.55)"; ctx.lineWidth = targetKeys.has(value) ? 3 : 1; ctx.stroke(path); if (state.selectedHex && same(hex, state.selectedHex)) { ctx.strokeStyle = "#ffcd3c"; ctx.lineWidth = 4; ctx.stroke(hexPath(point, size - 4)); } const piece = top(hex); if (!piece) continue; const image = imageFor(piece.type, piece.color); if (image.complete) ctx.drawImage(image, point[0] - size, point[1] - size * .862, size * 2, size * 1.724); const stack = state.board.get(value); if (stack.length > 1) { ctx.fillStyle = "#8e3f4b"; ctx.beginPath(); ctx.arc(point[0] + size * .55, point[1] + size * .55, size * .23, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = "#fff7e8"; ctx.font = `700 ${Math.max(11, size * .24)}px HiveSans`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(stack.length, point[0] + size * .55, point[1] + size * .55); } } }
+function draw() {
+  const boardLayout = layout(), { rect, size } = boardLayout, dpr = window.devicePixelRatio || 1;
+  const stage = document.querySelector(".board-stage");
+  if (stage) {
+    stage.style.backgroundSize = `${2112 * boardLayout.scale}px ${2464 * boardLayout.scale}px`;
+    stage.style.backgroundPosition = `${boardLayout.origin[0] - rect.left - 527.5 * boardLayout.scale}px ${boardLayout.origin[1] - rect.top - 307.5 * boardLayout.scale}px`;
+  }
+  canvas.width = rect.width * dpr; canvas.height = rect.height * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, rect.width, rect.height);
+  const targetKeys = new Set(state.candidates.map(move => key(...destination(move))));
+  for (const hex of boardCells()) {
+    const globalPoint = toPixel(hex, boardLayout), point = [globalPoint[0] - rect.left, globalPoint[1] - rect.top];
+    const value = key(...hex), target = targetKeys.has(value);
+    if (target) {
+      const path = hexPath(point, size - 2);
+      ctx.fillStyle = "rgba(54,225,120,.38)"; ctx.fill(path);
+      ctx.strokeStyle = "#1cd768"; ctx.lineWidth = 3; ctx.stroke(path);
+    }
+    if (state.selectedHex && same(hex, state.selectedHex)) {
+      ctx.strokeStyle = "#ffcd3c"; ctx.lineWidth = 4; ctx.stroke(hexPath(point, size - 4));
+    }
+    const piece = top(hex); if (!piece) continue;
+    const image = imageFor(piece.type, piece.color);
+    if (image.complete) ctx.drawImage(image, point[0] - size, point[1] - size * .862, size * 2, size * 1.724);
+    const stack = state.board.get(value);
+    if (stack.length > 1) {
+      ctx.fillStyle = "#8e3f4b"; ctx.beginPath(); ctx.arc(point[0] + size * .55, point[1] + size * .55, size * .23, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#fff7e8"; ctx.font = `700 ${Math.max(11, size * .24)}px HiveSans`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(stack.length, point[0] + size * .55, point[1] + size * .55);
+    }
+  }
+}
 function renderHands(color) { const root = document.querySelector(`#${color}Hand`); root.replaceChildren(); for (const [id, name] of PIECES) { const button = document.createElement("button"); button.className = `piece-card ${state.selectedHand === id ? "selected" : ""}`; button.type = "button"; button.disabled = color !== state.turn || hands[color][id] === 0; const image = document.createElement("img"); image.src = asset(id, color); image.alt = name; button.append(image); const label = document.createElement("span"); label.className = "piece-name"; label.textContent = name; button.append(label); const count = document.createElement("span"); count.className = "piece-count"; count.textContent = `x${hands[color][id]}`; button.append(count); button.addEventListener("click", () => chooseHand(id)); root.append(button); } }
 function renderMenu() { const menu = document.querySelector("#actionMenu"); menu.replaceChildren(); if (state.mode === "action") for (const option of actionOptions()) { const button = document.createElement("button"); button.type = "button"; button.textContent = option; button.addEventListener("click", () => chooseAction(option)); menu.append(button); } if (["victim", "throw-destination"].includes(state.mode)) { const button = document.createElement("button"); button.type = "button"; button.textContent = "Cancel"; button.className = "cancel"; button.addEventListener("click", () => { state.mode = "action"; state.candidates = legalMoves().filter(move => source(move) && same(source(move), state.selectedHex)); render(); }); menu.append(button); } const imitation = document.querySelector("#imitationMenu"); if (imitation) { imitation.replaceChildren(); for (const type of imitationOptions()) { const button = document.createElement("button"); button.type = "button"; button.textContent = type; button.className = type === state.imitation ? "selected" : ""; button.addEventListener("click", () => { state.imitation = type; render(); }); imitation.append(button); } } }
 function render() { renderHands("white"); renderHands("black"); renderMenu(); draw(); const label = state.status === "ongoing" ? `${colorLabel(state.turn)}'s turn -- Turn ${state.turnNumber}` : state.status === "draw" ? "Draw!" : `${colorLabel(state.status.replace("-wins", ""))} wins!`; document.querySelector("#turnReadout").textContent = label; const status = document.querySelector("#statusText"); if (status) status.textContent = state.mode === "destination" ? "Choose a highlighted destination" : state.mode === "victim" ? "Choose a piece to throw" : state.mode === "throw-destination" ? "Choose a throw destination" : "Choose a piece"; }
