@@ -71,6 +71,7 @@ function legalMoves() {
 }
 function source(move) { return move.kind === "placement" ? null : move.from ?? move.pillbug; }
 function destination(move) { return move.destination; }
+function highlightedHex(move) { return state.mode === "victim" ? move.victim : destination(move); }
 function equalMove(a, b) { return a.kind === b.kind && same(destination(a), destination(b)) && (!source(a) || same(source(a), source(b))) && (a.type ?? a.imitate) === (b.type ?? b.imitate); }
 function updateStatus() { const surrounded = color => cells().some(hex => state.board.get(key(...hex)).some(piece => piece.color === color && piece.type === "queen") && occupiedNeighbors(hex).length === 6); const white = surrounded("white"), black = surrounded("black"); state.status = white && black ? "draw" : white ? "black-wins" : black ? "white-wins" : "ongoing"; }
 function resetSelection() { state.mode = "idle"; state.selectedHex = null; state.selectedHand = null; state.candidates = []; state.throwCandidates = []; state.imitation = null; }
@@ -102,7 +103,7 @@ function chooseImitation(type) {
 function chooseAction(kind) { const candidates = kind === "Move" ? state.candidates.filter(move => move.kind === "movement" || (move.kind === "mosquito" && move.imitate === state.imitation)) : state.throwCandidates.length ? state.throwCandidates : state.candidates.filter(move => move.kind === "throw"); if (candidates.length) { state.mode = kind === "Move" ? "destination" : "victim"; state.candidates = candidates; render(); } }
 function boardClick(hex) { if (state.mode === "idle") return selectBoard(hex); if (state.mode === "action") return same(hex, state.selectedHex) ? (resetSelection(), render()) : selectBoard(hex); if (state.mode === "destination") { const move = state.candidates.find(candidate => same(destination(candidate), hex)); return move ? applyMove(move) : (state.mode = "action", render()); } if (state.mode === "victim") { const candidates = state.candidates.filter(move => same(move.victim, hex)); if (candidates.length) { state.mode = "throw-destination"; state.candidates = candidates; render(); } return; } const move = state.candidates.find(candidate => same(candidate.destination, hex)); if (move) applyMove(move); }
 
-function boardCells() { const result = new Set(state.board.keys()); for (const cell of state.board.keys()) for (const neighbor of neighbors(parse(cell))) result.add(key(...neighbor)); for (const move of state.candidates) result.add(key(...destination(move))); if (!result.size) result.add("0,0"); return [...result].map(parse); }
+function boardCells() { const result = new Set(state.board.keys()); for (const cell of state.board.keys()) for (const neighbor of neighbors(parse(cell))) result.add(key(...neighbor)); for (const move of state.candidates) result.add(key(...highlightedHex(move))); if (!result.size) result.add("0,0"); return [...result].map(parse); }
 function layout() {
   const rect = canvas.getBoundingClientRect();
   const windowWidth = window.innerWidth, windowHeight = window.innerHeight;
@@ -176,7 +177,7 @@ function draw() {
   }
   canvas.width = rect.width * dpr; canvas.height = rect.height * dpr;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, rect.width, rect.height);
-  const targetKeys = new Set(state.candidates.map(move => key(...destination(move))));
+  const targetKeys = new Set(state.candidates.map(move => key(...highlightedHex(move))));
   for (const hex of boardCells()) {
     const globalPoint = toPixel(hex, boardLayout), point = [globalPoint[0] - rect.left, globalPoint[1] - rect.top];
     const value = key(...hex);
