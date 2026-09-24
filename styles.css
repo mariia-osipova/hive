@@ -17,10 +17,10 @@
 .side-panel{padding:0}
 .hand{position:relative;height:calc(100vh - 64px);padding:10px 0 8px;display:grid;grid-template-rows:repeat(8,minmax(0,1fr));gap:0}
 .piece-card{position:relative;display:block;width:100%;height:100%;padding:0;border:0;outline:0!important;background:transparent}
-.piece-card img,.hand-fallback img{position:absolute;top:50%;left:90px;width:min(68px,8vh);height:min(59px,7vh);max-width:none;max-height:none;transform:translate(-50%,-50%);object-fit:contain}
-.piece-count{position:absolute;top:50%;left:126px;transform:translateY(-50%);font-size:min(22px,3vh);white-space:nowrap}
-.black-panel .piece-card img,.black-panel .hand-fallback img{left:auto;right:56px;transform:translate(50%,-50%)}
-.black-panel .piece-count{left:auto;right:126px;text-align:right}
+.piece-card img,.hand-fallback img{position:absolute;top:50%;left:50%;width:min(68px,8vh);height:min(59px,7vh);max-width:none;max-height:none;transform:translate(-50%,-50%);object-fit:contain}
+.piece-count{position:absolute;top:50%;left:calc(50% + 36px);transform:translateY(-50%);font-size:min(22px,3vh);white-space:nowrap}
+.black-panel .piece-card img,.black-panel .hand-fallback img{left:50%;right:auto;transform:translate(-50%,-50%)}
+.black-panel .piece-count{left:auto;right:calc(50% + 36px);text-align:right}
 .brand-lockup,.reset-button{display:none}
 .imitation-menu{position:absolute;left:50%;top:78px;display:flex;gap:8px;transform:translateX(-50%);z-index:5}.imitation-menu button{min-width:58px;height:34px;border:2px solid #ebe4d2;border-radius:17px;color:#ebe4d2;background:#5a564d;cursor:pointer;font:12px HiveSans,Arial}.imitation-menu button.selected{background:#a07936}.action-menu button.cancel{background:#963c32}
 .hand-fallback{display:grid;grid-row:1 / -1;width:100%;height:100%;grid-template-rows:repeat(8,minmax(0,1fr));gap:0}
