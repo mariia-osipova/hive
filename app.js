@@ -173,9 +173,7 @@ function draw() {
   const targetKeys = new Set(state.candidates.map(move => key(...destination(move))));
   for (const hex of boardCells()) {
     const globalPoint = toPixel(hex, boardLayout), point = [globalPoint[0] - rect.left, globalPoint[1] - rect.top];
-    const value = key(...hex), target = targetKeys.has(value);
-    if (target && highlightTexture) { const scale = Math.min((2 * size) / highlightTexture.width, (Math.sqrt(3) * size) / highlightTexture.height); const width = highlightTexture.width * scale, height = highlightTexture.height * scale; ctx.drawImage(highlightTexture, point[0] - width / 2, point[1] - height / 2, width, height); }
-    if (state.selectedHex && same(hex, state.selectedHex) && selectionTexture) { const scale = Math.min((2 * size) / selectionTexture.width, (Math.sqrt(3) * size) / selectionTexture.height); const width = selectionTexture.width * scale, height = selectionTexture.height * scale; ctx.drawImage(selectionTexture, point[0] - width / 2, point[1] - height / 2, width, height); }
+    const value = key(...hex);
     const piece = top(hex); if (!piece) continue;
     const image = imageFor(piece.type, piece.color);
     if (image.complete) ctx.drawImage(image, point[0] - size, point[1] - size * .862, size * 2, size * 1.724);
@@ -185,6 +183,15 @@ function draw() {
       ctx.fillStyle = "#fff7e8"; ctx.font = `700 ${Math.max(11, size * .24)}px HiveSans`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
       ctx.fillText(stack.length, point[0] + size * .55, point[1] + size * .55);
     }
+  }
+  // The original SFML renderer draws board pieces first and selections/highlights
+  // afterwards. This second pass keeps beetle destinations visible even when
+  // the destination is an occupied hexagon.
+  for (const hex of boardCells()) {
+    const globalPoint = toPixel(hex, boardLayout), point = [globalPoint[0] - rect.left, globalPoint[1] - rect.top];
+    const value = key(...hex);
+    if (targetKeys.has(value) && highlightTexture) { const scale = Math.min((2 * size) / highlightTexture.width, (Math.sqrt(3) * size) / highlightTexture.height); const width = highlightTexture.width * scale, height = highlightTexture.height * scale; ctx.drawImage(highlightTexture, point[0] - width / 2, point[1] - height / 2, width, height); }
+    if (state.selectedHex && same(hex, state.selectedHex) && selectionTexture) { const scale = Math.min((2 * size) / selectionTexture.width, (Math.sqrt(3) * size) / selectionTexture.height); const width = selectionTexture.width * scale, height = selectionTexture.height * scale; ctx.drawImage(selectionTexture, point[0] - width / 2, point[1] - height / 2, width, height); }
   }
 }
 function renderHands(color) { const root = document.querySelector(`#${color}Hand`); root.replaceChildren(); for (const [id, name] of PIECES) { const button = document.createElement("button"); button.className = `piece-card ${state.selectedHand === id ? "selected" : ""}`; button.type = "button"; button.disabled = color !== state.turn || hands[color][id] === 0; const image = document.createElement("img"); image.src = asset(id, color); image.alt = name; button.append(image); const label = document.createElement("span"); label.className = "piece-name"; label.textContent = name; button.append(label); const count = document.createElement("span"); count.className = "piece-count"; count.textContent = `x${hands[color][id]}`; button.append(count); button.addEventListener("click", () => chooseHand(id)); root.append(button); } }
