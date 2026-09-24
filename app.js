@@ -82,7 +82,15 @@ function applyMove(move) {
   state.lastMoved = moved.id; state.turn = state.turn === "white" ? "black" : "white"; state.turnNumber++; updateStatus(); resetSelection(); if (sound?.src) { sound.currentTime = 0; sound.play().catch(() => {}); } render(); return true;
 }
 function chooseHand(type) { const candidates = legalMoves().filter(move => move.kind === "placement" && move.type === type); if (candidates.length) { state.mode = "destination"; state.selectedHand = type; state.candidates = candidates; render(); } }
-function selectBoard(hex) { const candidates = legalMoves().filter(move => source(move) && same(source(move), hex)); if (!candidates.length) { resetSelection(); render(); return; } state.mode = "action"; state.selectedHex = hex; state.candidates = candidates; state.imitation = null; render(); }
+function selectBoard(hex) {
+  const candidates = legalMoves().filter(move => source(move) && same(source(move), hex));
+  if (!candidates.length) { resetSelection(); render(); return; }
+  const direct = candidates.filter(move => move.kind === "movement" || move.kind === "mosquito");
+  state.selectedHex = hex; state.imitation = null;
+  if (direct.length) { state.mode = "destination"; state.candidates = direct; }
+  else { state.mode = "victim"; state.candidates = candidates.filter(move => move.kind === "throw"); }
+  render();
+}
 function actionOptions() { const move = state.candidates.some(candidate => candidate.kind === "movement" || (candidate.kind === "mosquito" && candidate.imitate === state.imitation)); const throwing = state.candidates.some(candidate => candidate.kind === "throw") && (!state.candidates.some(candidate => candidate.kind === "mosquito") || state.imitation === "pillbug"); return [move && "Move", throwing && "Throw"].filter(Boolean); }
 function imitationOptions() { return state.selectedHex && top(state.selectedHex)?.type === "mosquito" ? [...new Set(state.candidates.filter(move => move.kind === "mosquito").map(move => move.imitate).concat(state.candidates.some(move => move.kind === "throw") ? ["pillbug"] : []))] : []; }
 function chooseAction(kind) { const candidates = kind === "Move" ? state.candidates.filter(move => move.kind === "movement" || (move.kind === "mosquito" && move.imitate === state.imitation)) : state.candidates.filter(move => move.kind === "throw"); if (candidates.length) { state.mode = kind === "Move" ? "destination" : "victim"; state.candidates = candidates; render(); } }
