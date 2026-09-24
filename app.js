@@ -121,24 +121,36 @@ function hexPath(point, size) { const path = new Path2D(); for (let i = 0; i < 6
 const imageCache = new Map();
 function imageFor(type, color) { const src = asset(type, color); if (!imageCache.has(src)) { const image = new Image(); image.onload = draw; image.src = src; imageCache.set(src, image); } return imageCache.get(src); }
 let highlightTexture = null;
+let selectionTexture = null;
 const highlightSource = new Image();
 highlightSource.onload = () => {
   const source = document.createElement("canvas"), sourceContext = source.getContext("2d");
   source.width = highlightSource.naturalWidth; source.height = highlightSource.naturalHeight;
   sourceContext.drawImage(highlightSource, 0, 0);
   const image = sourceContext.getImageData(0, 0, source.width, source.height);
+  const originalAlpha = new Uint8ClampedArray(image.data);
   const edgeRadius = 12, threshold = 8;
   for (let y = 0; y < source.height; y++) for (let x = 0; x < source.width; x++) {
-    const index = (y * source.width + x) * 4, alpha = image.data[index + 3];
+    const index = (y * source.width + x) * 4, alpha = originalAlpha[index + 3];
     if (alpha <= threshold) continue;
     let edge = false;
     for (let dy = -edgeRadius; dy <= edgeRadius && !edge; dy++) for (let dx = -edgeRadius; dx <= edgeRadius; dx++) {
       const nx = x + dx, ny = y + dy;
-      if (nx < 0 || ny < 0 || nx >= source.width || ny >= source.height || image.data[(ny * source.width + nx) * 4 + 3] <= threshold) { edge = true; break; }
+      if (nx < 0 || ny < 0 || nx >= source.width || ny >= source.height || originalAlpha[(ny * source.width + nx) * 4 + 3] <= threshold) { edge = true; break; }
     }
     image.data[index] = edge ? 28 : 54; image.data[index + 1] = edge ? 215 : 225; image.data[index + 2] = edge ? 104 : 120; image.data[index + 3] = edge ? 235 : 52;
   }
-  sourceContext.putImageData(image, 0, 0); highlightTexture = source; draw();
+  sourceContext.putImageData(image, 0, 0); highlightTexture = source;
+  const selection = document.createElement("canvas"), selectionContext = selection.getContext("2d");
+  selection.width = source.width; selection.height = source.height;
+  const selectionImage = selectionContext.createImageData(selection.width, selection.height);
+  for (let y = 0; y < source.height; y++) for (let x = 0; x < source.width; x++) {
+    const index = (y * source.width + x) * 4, alpha = originalAlpha[index + 3];
+    if (alpha > 8 && (x < 12 || y < 12 || x >= source.width - 12 || y >= source.height - 12 || originalAlpha[(y * source.width + Math.max(0, x - 12)) * 4 + 3] <= 8 || originalAlpha[(Math.min(source.height - 1, y + 12) * source.width + x) * 4 + 3] <= 8)) {
+      selectionImage.data[index] = 255; selectionImage.data[index + 1] = 205; selectionImage.data[index + 2] = 60; selectionImage.data[index + 3] = 255;
+    }
+  }
+  selectionContext.putImageData(selectionImage, 0, 0); selectionTexture = selection; draw();
 };
 highlightSource.src = new URL("img/insects/white/bee-white-638-550.png", import.meta.url).href;
 function draw() {
@@ -155,9 +167,7 @@ function draw() {
     const globalPoint = toPixel(hex, boardLayout), point = [globalPoint[0] - rect.left, globalPoint[1] - rect.top];
     const value = key(...hex), target = targetKeys.has(value);
     if (target && highlightTexture) { const scale = Math.min((2 * size) / highlightTexture.width, (Math.sqrt(3) * size) / highlightTexture.height); const width = highlightTexture.width * scale, height = highlightTexture.height * scale; ctx.drawImage(highlightTexture, point[0] - width / 2, point[1] - height / 2, width, height); }
-    if (state.selectedHex && same(hex, state.selectedHex)) {
-      ctx.strokeStyle = "#ffcd3c"; ctx.lineWidth = 4; ctx.stroke(hexPath(point, size - 4));
-    }
+    if (state.selectedHex && same(hex, state.selectedHex) && selectionTexture) { const scale = Math.min((2 * size) / selectionTexture.width, (Math.sqrt(3) * size) / selectionTexture.height); const width = selectionTexture.width * scale, height = selectionTexture.height * scale; ctx.drawImage(selectionTexture, point[0] - width / 2, point[1] - height / 2, width, height); }
     const piece = top(hex); if (!piece) continue;
     const image = imageFor(piece.type, piece.color);
     if (image.complete) ctx.drawImage(image, point[0] - size, point[1] - size * .862, size * 2, size * 1.724);
