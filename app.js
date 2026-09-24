@@ -5,133 +5,101 @@ const PIECES = [
   ["ladybug", "Ladybug", "ladybug", 1], ["pillbug", "Pillbug", "pillbug", 1],
 ];
 const DIRS = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]];
+const byId = id => PIECES.find(piece => piece[0] === id);
 const key = (q, r) => `${q},${r}`;
-const parseKey = (value) => value.split(",").map(Number);
+const parse = value => value.split(",").map(Number);
 const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
 const same = (a, b) => a[0] === b[0] && a[1] === b[1];
-const neighbors = (hex) => DIRS.map((dir) => add(hex, dir));
+const neighbors = hex => DIRS.map(dir => add(hex, dir));
+const asset = (type, color) => new URL(`img/insects/${color}/${byId(type)[2]}-${color}-638-550.png`, import.meta.url).href;
+const colorLabel = color => color[0].toUpperCase() + color.slice(1);
 const canvas = document.querySelector("#board");
 const ctx = canvas.getContext("2d");
-const state = { board: new Map(), turn: "white", turnNumber: 1, lastMoved: null, selectedHand: null, selectedHex: null, pendingTargets: new Set(), targets: new Set(), message: "Choose a piece from your hand" };
-const emptyHand = () => Object.fromEntries(PIECES.map(([id, , , count]) => [id, count]));
-const hands = { white: emptyHand(), black: emptyHand() };
-const imageCache = new Map();
 const sound = document.querySelector("#placementSound");
+const initialHand = () => Object.fromEntries(PIECES.map(([id, , , count]) => [id, count]));
+const hands = { white: initialHand(), black: initialHand() };
+const state = { board: new Map(), turn: "white", turnNumber: 1, lastMoved: null, status: "ongoing", mode: "idle", selectedHex: null, selectedHand: null, candidates: [], imitation: null };
 
-function asset(id, color) {
-  const piece = PIECES.find(([pieceId]) => pieceId === id);
-  return new URL(`img/insects/${color}/${piece[2]}-${color}-638-550.png`, import.meta.url).href;
-}
-function imageFor(id, color) {
-  const src = asset(id, color);
-  if (!imageCache.has(src)) {
-    const image = new Image();
-    image.onload = () => draw();
-    image.onerror = () => console.error(`Could not load piece image: ${src}`);
-    image.src = src;
-    imageCache.set(src, image);
-  }
-  return imageCache.get(src);
-}
+function top(hex) { return state.board.get(key(...hex))?.at(-1) ?? null; }
 function occupied(hex) { return state.board.has(key(...hex)); }
-function top(hex) { const stack = state.board.get(key(...hex)); return stack?.at(-1) ?? null; }
-
-function axialToPixel(hex, size, center) { return [center[0] + size * 1.5 * hex[0], center[1] + size * Math.sqrt(3) * (hex[1] + hex[0] / 2)]; }
-function pixelToAxial(point, size, center) {
-  const x = (point[0] - center[0]) / size, y = (point[1] - center[1]) / size;
-  const qf = (2 / 3) * x, rf = (-1 / 3) * x + (Math.sqrt(3) / 3) * y;
-  let q = Math.round(qf), r = Math.round(rf), s = Math.round(-qf - rf);
-  if (Math.abs(q - qf) > Math.abs(r - rf) && Math.abs(q - qf) > Math.abs(s + qf + rf)) q = -r - s;
-  else if (Math.abs(r - rf) > Math.abs(s + qf + rf)) r = -q - s;
-  return [q, r];
+function height(hex) { return state.board.get(key(...hex))?.length ?? 0; }
+function cells() { return [...state.board.keys()].map(parse); }
+function emptyNeighbors(hex) { return neighbors(hex).filter(next => !occupied(next)); }
+function occupiedNeighbors(hex) { return neighbors(hex).filter(occupied); }
+function connectedWithout(from) {
+  const remaining = new Set(state.board.keys()); if (height(from) <= 1) remaining.delete(key(...from));
+  if (remaining.size < 2) return true;
+  const start = remaining.values().next().value, seen = new Set([start]), queue = [start];
+  while (queue.length) for (const next of neighbors(parse(queue.shift()))) { const value = key(...next); if (remaining.has(value) && !seen.has(value)) { seen.add(value); queue.push(value); } }
+  return seen.size === remaining.size;
 }
-function hexPath(center, size) { const path = new Path2D(); for (let i = 0; i < 6; i++) { const angle = Math.PI / 180 * (60 * i); const point = [center[0] + size * Math.cos(angle), center[1] + size * Math.sin(angle)]; i ? path.lineTo(...point) : path.moveTo(...point); } path.closePath(); return path; }
-function boardCells() { const cells = new Set(state.board.keys()); for (const cell of state.board.keys()) for (const neighbor of neighbors(parseKey(cell))) cells.add(key(...neighbor)); for (const target of state.targets) cells.add(target); if (!cells.size) cells.add("0,0"); return [...cells].map(parseKey); }
-function geometry() { const rect = canvas.getBoundingClientRect(), cells = boardCells(); const qs = cells.map(([q]) => q), rs = cells.map(([, r]) => r); const spanX = Math.max(4, Math.max(...qs) - Math.min(...qs) + 3), spanY = Math.max(4, Math.max(...rs) - Math.min(...rs) + 3); return { rect, size: Math.max(24, Math.min((rect.width - 56) / (1.5 * spanX), (rect.height - 56) / (Math.sqrt(3) * spanY))), center: [rect.width / 2, rect.height / 2] }; }
-
-function draw() {
-  const { rect, size, center } = geometry(), dpr = window.devicePixelRatio || 1;
-  canvas.width = rect.width * dpr; canvas.height = rect.height * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, rect.width, rect.height);
-  for (const hex of boardCells()) {
-    const point = axialToPixel(hex, size, center), value = key(...hex), path = hexPath(point, size - 2);
-    ctx.fillStyle = state.targets.has(value) ? "#77bd91" : "#d9a9a1"; ctx.fill(path); ctx.strokeStyle = state.targets.has(value) ? "#2d7e5b" : "#c5817e"; ctx.lineWidth = 2; ctx.stroke(path);
-    if (state.selectedHex && same(hex, state.selectedHex)) { ctx.strokeStyle = "#f7d36b"; ctx.lineWidth = 4; ctx.stroke(hexPath(point, size - 4)); }
-    const piece = top(hex); if (!piece) continue; const image = imageFor(piece.type, piece.color); if (image.complete) ctx.drawImage(image, point[0] - size, point[1] - size * .862, size * 2, size * 1.724);
-    const stack = state.board.get(value); if (stack.length > 1) { ctx.fillStyle = "#8e3f4b"; ctx.beginPath(); ctx.arc(point[0] + size * .55, point[1] + size * .55, size * .23, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = "#fff7e8"; ctx.font = `700 ${Math.max(11, size * .24)}px DM Sans`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(stack.length, point[0] + size * .55, point[1] + size * .55); }
+function canSlide(from, to) {
+  const index = DIRS.findIndex(dir => same(add(from, dir), to)); if (index < 0) return false;
+  return !occupied(add(from, DIRS[(index + 1) % 6])) || !occupied(add(from, DIRS[(index + 5) % 6]));
+}
+function attached(to, from) {
+  if (state.board.size <= 1) return true;
+  return neighbors(to).some(next => { const value = key(...next); return state.board.has(value) && (value !== key(...from) || height(from) > 1); });
+}
+function queenMoves(from) { return emptyNeighbors(from).filter(to => canSlide(from, to) && attached(to, from)); }
+function beetleMoves(from) { const onPile = height(from) > 1; return neighbors(from).filter(to => occupied(to) || onPile || (canSlide(from, to) && attached(to, from))); }
+function grasshopperMoves(from) { const result = []; for (const dir of DIRS) { let cursor = add(from, dir); if (!occupied(cursor)) continue; while (occupied(cursor)) cursor = add(cursor, dir); result.push(cursor); } return result; }
+function antMoves(from) { const seen = new Set([key(...from)]), result = [], queue = [from]; while (queue.length) for (const next of queenMoves(queue.shift())) { const value = key(...next); if (!seen.has(value)) { seen.add(value); result.push(next); queue.push(next); } } return result; }
+function spiderMoves(from) { const result = new Set(); function walk(current, depth, visited) { if (depth === 3) { result.add(key(...current)); return; } for (const next of queenMoves(current)) { const value = key(...next); if (!visited.has(value)) walk(next, depth + 1, new Set([...visited, value])); } } walk(from, 0, new Set([key(...from)])); return [...result].map(parse); }
+function ladybugMoves(from) { const climbed = new Set(); const graphNeighbors = hex => neighbors(hex).filter(next => occupied(next) && key(...next) !== key(...from)); for (const first of occupiedNeighbors(from)) for (const second of graphNeighbors(first)) climbed.add(key(...second)); const result = new Set(); for (const hex of climbed) for (const destination of emptyNeighbors(parse(hex))) result.add(key(...destination)); return [...result].map(parse); }
+function movement(type, from) { if (["queen", "pillbug"].includes(type)) return queenMoves(from); if (type === "beetle") return beetleMoves(from); if (type === "grasshopper") return grasshopperMoves(from); if (type === "ant") return antMoves(from); if (type === "spider") return spiderMoves(from); if (type === "ladybug") return ladybugMoves(from); return []; }
+function imitatable(from) { const result = []; for (const neighbor of occupiedNeighbors(from)) { const type = top(neighbor).type; if (type !== "mosquito" && !result.includes(type)) result.push(type); } return result; }
+function throwsFrom(from) { return occupiedNeighbors(from).filter(victim => height(victim) === 1 && top(victim).id !== state.lastMoved && connectedWithout(victim)).flatMap(victim => emptyNeighbors(from).map(destination => ({ kind: "throw", pillbug: from, victim, destination }))); }
+function placementSpots() { const occupiedCells = cells(); if (!occupiedCells.length) return [[0, 0]]; if (occupiedCells.length === 1) return emptyNeighbors(occupiedCells[0]); const candidates = new Set(); for (const cell of occupiedCells) for (const empty of emptyNeighbors(cell)) candidates.add(key(...empty)); return [...candidates].map(parse).filter(hex => occupiedNeighbors(hex).every(neighbor => top(neighbor).color === state.turn)); }
+function legalMoves() {
+  if (state.status !== "ongoing") return [];
+  const moves = [], hand = hands[state.turn], turnForPlayer = Math.floor((state.turnNumber + 1) / 2);
+  const types = turnForPlayer === 4 && hand.queen > 0 ? ["queen"] : PIECES.map(piece => piece[0]).filter(type => hand[type] > 0);
+  for (const type of types) for (const destination of placementSpots()) moves.push({ kind: "placement", type, destination });
+  if (hand.queen > 0) return moves;
+  for (const from of cells()) {
+    const piece = top(from); if (piece.color !== state.turn || piece.id === state.lastMoved) continue;
+    if (piece.type === "mosquito") {
+      if (height(from) > 1) { if (connectedWithout(from)) for (const destination of beetleMoves(from)) moves.push({ kind: "movement", from, destination }); }
+      else if (connectedWithout(from)) { for (const imitate of imitatable(from)) for (const destination of movement(imitate, from)) moves.push({ kind: "mosquito", from, imitate, destination }); if (imitatable(from).includes("pillbug")) moves.push(...throwsFrom(from)); }
+    } else {
+      if (connectedWithout(from)) for (const destination of movement(piece.type, from)) moves.push({ kind: "movement", from, destination });
+      if (piece.type === "pillbug") moves.push(...throwsFrom(from));
+    }
   }
+  return moves;
 }
-
-function connectedAfterMoving(from) { const remaining = new Set(state.board.keys()); remaining.delete(key(...from)); if (remaining.size < 2) return true; const start = remaining.values().next().value, seen = new Set([start]), queue = [start]; while (queue.length) { const current = parseKey(queue.shift()); for (const neighbor of neighbors(current)) { const value = key(...neighbor); if (remaining.has(value) && !seen.has(value)) { seen.add(value); queue.push(value); } } } return seen.size === remaining.size; }
-function canSlide(from, to) { const shared = neighbors(from).filter((hex) => neighbors(to).some((other) => same(hex, other))); return shared.some((hex) => !occupied(hex)); }
-function attachedAfterMove(from, to) { if (state.board.size <= 1) return true; const remaining = new Set(state.board.keys()); remaining.delete(key(...from)); return neighbors(to).some((hex) => remaining.has(key(...hex))); }
-function emptyNeighborMoves(from) { return neighbors(from).filter((to) => !occupied(to) && canSlide(from, to) && attachedAfterMove(from, to)); }
-function movementTargets(from, piece) {
-  if (!connectedAfterMoving(from)) return [];
-  if (["queen", "pillbug"].includes(piece.type)) return emptyNeighborMoves(from);
-  if (piece.type === "beetle") return neighbors(from).filter((to) => occupied(to) || (canSlide(from, to) && attachedAfterMove(from, to)));
-  if (piece.type === "grasshopper") return DIRS.flatMap((dir) => { let cursor = add(from, dir); if (!occupied(cursor)) return []; while (occupied(cursor)) cursor = add(cursor, dir); return [cursor]; });
-  if (piece.type === "ant") { const found = new Set(), queue = [...emptyNeighborMoves(from)]; queue.forEach((hex) => found.add(key(...hex))); while (queue.length) { const current = queue.shift(); for (const next of emptyNeighborMoves(current)) { const value = key(...next); if (!found.has(value) && !same(next, from)) { found.add(value); queue.push(next); } } } return [...found].map(parseKey); }
-  if (piece.type === "spider") { const found = new Set(); function walk(current, depth, visited) { if (depth === 3) { found.add(key(...current)); return; } for (const next of emptyNeighborMoves(current)) { const value = key(...next); if (!visited.has(value)) walk(next, depth + 1, new Set([...visited, value])); } } walk(from, 0, new Set([key(...from)])); return [...found].map(parseKey); }
-  return [];
+function source(move) { return move.kind === "placement" ? null : move.from ?? move.pillbug; }
+function destination(move) { return move.destination; }
+function equalMove(a, b) { return a.kind === b.kind && same(destination(a), destination(b)) && (!source(a) || same(source(a), source(b))) && (a.type ?? a.imitate) === (b.type ?? b.imitate); }
+function updateStatus() { const surrounded = color => cells().some(hex => state.board.get(key(...hex)).some(piece => piece.color === color && piece.type === "queen") && occupiedNeighbors(hex).length === 6); const white = surrounded("white"), black = surrounded("black"); state.status = white && black ? "draw" : white ? "black-wins" : black ? "white-wins" : "ongoing"; }
+function resetSelection() { state.mode = "idle"; state.selectedHex = null; state.selectedHand = null; state.candidates = []; state.imitation = null; }
+function applyMove(move) {
+  if (!legalMoves().some(candidate => equalMove(candidate, move))) return false;
+  let moved;
+  if (move.kind === "placement") { moved = { id: `${state.turn}-${state.turnNumber}`, type: move.type, color: state.turn }; state.board.set(key(...move.destination), [moved]); hands[state.turn][move.type]--; }
+  else { const from = move.kind === "throw" ? move.victim : move.from, stack = state.board.get(key(...from)); moved = stack.pop(); if (!stack.length) state.board.delete(key(...from)); const target = key(...move.destination); state.board.set(target, [...(state.board.get(target) ?? []), moved]); }
+  state.lastMoved = moved.id; state.turn = state.turn === "white" ? "black" : "white"; state.turnNumber++; updateStatus(); resetSelection(); if (sound?.src) { sound.currentTime = 0; sound.play().catch(() => {}); } render(); return true;
 }
-function placementTargets() {
-  if (!state.board.size) return [[0, 0]];
-  const candidates = new Set(); for (const cell of state.board.keys()) for (const neighbor of neighbors(parseKey(cell))) if (!occupied(neighbor)) candidates.add(key(...neighbor));
-  return [...candidates].map(parseKey).filter((hex) => { const touching = neighbors(hex).filter(occupied); return touching.length && (state.board.size === 1 || touching.every((neighbor) => top(neighbor).color === state.turn)); });
-}
-function availableTypes() { const personalTurn = Math.ceil(state.turnNumber / 2), hand = hands[state.turn]; return PIECES.filter(([id]) => hand[id] > 0 && !(personalTurn >= 4 && hand.queen > 0 && id !== "queen")); }
-function selectHand(type) { if (!availableTypes().some(([id]) => id === type)) return; state.selectedHand = type; state.selectedHex = null; state.targets = new Set(placementTargets().map((hex) => key(...hex))); state.message = `Place ${PIECES.find(([id]) => id === type)[1]}`; render(); }
-function selectBoard(hex) { const piece = top(hex); if (!piece || piece.color !== state.turn || state.lastMoved === key(...hex) || hands[state.turn].queen > 0) return; state.selectedHex = hex; state.selectedHand = null; state.pendingTargets = new Set(movementTargets(hex, piece).map((target) => key(...target))); state.targets = new Set(); state.message = state.pendingTargets.size ? `Selected ${piece.type}` : "This piece has no legal destination"; render(); }
-function chooseMove() { state.targets = new Set(state.pendingTargets); state.message = "Choose a green destination"; render(); }
-function playSound() { if (!sound.src) return; sound.currentTime = 0; sound.play().catch(() => {}); }
-function moveTo(hex) { const value = key(...hex); if (!state.targets.has(value)) { state.message = "Choose a highlighted hex"; render(); return; } if (state.selectedHand) { state.board.set(value, [{ type: state.selectedHand, color: state.turn }]); hands[state.turn][state.selectedHand]--; playSound(); } else { const stack = state.board.get(key(...state.selectedHex)); const piece = stack.pop(); if (!stack.length) state.board.delete(key(...state.selectedHex)); state.board.set(value, [...(state.board.get(value) || []), piece]); } state.lastMoved = value; state.turn = state.turn === "white" ? "black" : "white"; state.turnNumber++; state.selectedHand = null; state.selectedHex = null; state.targets = new Set(); state.message = "Choose a piece from your hand"; render(); }
-function renderHand(color) {
-  const root = document.querySelector(`#${color}Hand`);
-  root.replaceChildren();
-  for (const [id, name, , initial] of PIECES) {
-    const button = document.createElement("button");
-    button.className = `piece-card ${state.selectedHand === id && state.turn === color ? "selected" : ""}`;
-    button.type = "button";
-    button.disabled = color !== state.turn || hands[color][id] === 0;
+function chooseHand(type) { const candidates = legalMoves().filter(move => move.kind === "placement" && move.type === type); if (candidates.length) { state.mode = "destination"; state.selectedHand = type; state.candidates = candidates; render(); } }
+function selectBoard(hex) { const candidates = legalMoves().filter(move => source(move) && same(source(move), hex)); if (!candidates.length) { resetSelection(); render(); return; } state.mode = "action"; state.selectedHex = hex; state.candidates = candidates; state.imitation = null; render(); }
+function actionOptions() { const move = state.candidates.some(candidate => candidate.kind === "movement" || (candidate.kind === "mosquito" && candidate.imitate === state.imitation)); const throwing = state.candidates.some(candidate => candidate.kind === "throw") && (!state.candidates.some(candidate => candidate.kind === "mosquito") || state.imitation === "pillbug"); return [move && "Move", throwing && "Throw"].filter(Boolean); }
+function imitationOptions() { return state.selectedHex && top(state.selectedHex)?.type === "mosquito" ? [...new Set(state.candidates.filter(move => move.kind === "mosquito").map(move => move.imitate).concat(state.candidates.some(move => move.kind === "throw") ? ["pillbug"] : []))] : []; }
+function chooseAction(kind) { const candidates = kind === "Move" ? state.candidates.filter(move => move.kind === "movement" || (move.kind === "mosquito" && move.imitate === state.imitation)) : state.candidates.filter(move => move.kind === "throw"); if (candidates.length) { state.mode = kind === "Move" ? "destination" : "victim"; state.candidates = candidates; render(); } }
+function boardClick(hex) { if (state.mode === "idle") return selectBoard(hex); if (state.mode === "action") return same(hex, state.selectedHex) ? (resetSelection(), render()) : selectBoard(hex); if (state.mode === "destination") { const move = state.candidates.find(candidate => same(destination(candidate), hex)); return move ? applyMove(move) : (state.mode = "action", render()); } if (state.mode === "victim") { const candidates = state.candidates.filter(move => same(move.victim, hex)); if (candidates.length) { state.mode = "throw-destination"; state.candidates = candidates; render(); } return; } const move = state.candidates.find(candidate => same(candidate.destination, hex)); if (move) applyMove(move); }
 
-    const image = document.createElement("img");
-    image.src = asset(id, color);
-    image.alt = name;
-    image.width = 68;
-    image.height = 68;
-    image.onerror = () => console.error(`Could not load hand image: ${image.src}`);
-    button.append(image);
-
-    const label = document.createElement("span");
-    label.className = "piece-name";
-    label.textContent = name;
-    button.append(label);
-
-    const count = document.createElement("span");
-    count.className = "piece-count";
-    count.textContent = `x${hands[color][id]}`;
-    button.append(count);
-    button.addEventListener("click", () => selectHand(id));
-    root.append(button);
-  }
-}
-function render() { draw(); renderHand("white"); renderHand("black"); document.querySelector("#turnReadout").innerHTML = `${state.turn[0].toUpperCase() + state.turn.slice(1)} to move <span>${String(state.turnNumber).padStart(2, "0")}</span>`; document.querySelector("#statusText").textContent = state.message; document.querySelector("#hintText").textContent = state.selectedHand ? "Click a green hex to place the piece." : state.selectedHex ? "Click a green hex to move the selected piece." : "Select a tile from the hand, then place it on a highlighted hex."; document.querySelector("#whiteScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "white").length; document.querySelector("#blackScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "black").length; document.querySelector("#boardEmpty").classList.toggle("hidden", state.board.size > 0); }
-
-function render() {
-  renderHand("white");
-  renderHand("black");
-  draw();
-  document.querySelector("#turnReadout").textContent = `${state.turn[0].toUpperCase() + state.turn.slice(1)}'s turn -- Turn ${state.turnNumber}`;
-  document.querySelector("#statusText").textContent = state.message;
-  document.querySelector("#hintText").textContent = state.selectedHand ? "Click a green hex to place the piece." : state.selectedHex ? "Choose Move, then click a green hex." : "Select a tile from the hand, then place it on a highlighted hex.";
-  document.querySelector("#whiteScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "white").length;
-  document.querySelector("#blackScore").textContent = [...state.board.values()].flat().filter((piece) => piece.color === "black").length;
-  const actionMenu = document.querySelector("#actionMenu");
-  actionMenu.innerHTML = state.selectedHex && state.pendingTargets.size ? '<button type="button" title="Move">Move</button>' : "";
-  const moveButton = actionMenu.querySelector("button");
-  if (moveButton) moveButton.addEventListener("click", chooseMove);
-}
-
-canvas.addEventListener("click", (event) => { const { rect, size, center } = geometry(), point = [event.clientX - rect.left, event.clientY - rect.top], hex = pixelToAxial(point, size, center); if (state.targets.has(key(...hex))) moveTo(hex); else if (occupied(hex)) selectBoard(hex); });
-document.querySelector("#resetButton").addEventListener("click", () => { state.board.clear(); state.turn = "white"; state.turnNumber = 1; state.lastMoved = null; state.selectedHand = null; state.selectedHex = null; state.targets = new Set(); Object.assign(hands.white, emptyHand()); Object.assign(hands.black, emptyHand()); state.message = "Choose a piece from your hand"; render(); });
-window.addEventListener("resize", draw); render();
+function boardCells() { const result = new Set(state.board.keys()); for (const cell of state.board.keys()) for (const neighbor of neighbors(parse(cell))) result.add(key(...neighbor)); for (const move of state.candidates) result.add(key(...destination(move))); if (!result.size) result.add("0,0"); return [...result].map(parse); }
+function geometry() { const rect = canvas.getBoundingClientRect(); const occupiedCells = cells(); const qs = occupiedCells.map(([q]) => q), rs = occupiedCells.map(([, r]) => r); const spanX = Math.max(4, Math.max(...qs, 0) - Math.min(...qs, 0) + 3), spanY = Math.max(4, Math.max(...rs, 0) - Math.min(...rs, 0) + 3); return { rect, size: Math.max(24, Math.min((rect.width - 50) / (1.65 * spanX), (rect.height - 50) / (1.93 * spanY))), center: [rect.width / 2, rect.height / 2] }; }
+function toPixel(hex, size, center) { return [center[0] + size * 1.65 * hex[0], center[1] + size * (0.965 * hex[0] + 1.93 * hex[1])]; }
+function fromPixel(point, size, center) { const q = Math.round((point[0] - center[0]) / (size * 1.65)); const r = Math.round(((point[1] - center[1]) / size - 0.965 * q) / 1.93); return [q, r]; }
+function hexPath(point, size) { const path = new Path2D(); for (let i = 0; i < 6; i++) { const angle = Math.PI / 3 * i + Math.PI / 6, x = point[0] + size * Math.cos(angle), y = point[1] + size * .862 * Math.sin(angle); i ? path.lineTo(x, y) : path.moveTo(x, y); } path.closePath(); return path; }
+const imageCache = new Map();
+function imageFor(type, color) { const src = asset(type, color); if (!imageCache.has(src)) { const image = new Image(); image.onload = draw; image.src = src; imageCache.set(src, image); } return imageCache.get(src); }
+function draw() { const { rect, size, center } = geometry(), dpr = window.devicePixelRatio || 1; canvas.width = rect.width * dpr; canvas.height = rect.height * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, rect.width, rect.height); const targetKeys = new Set(state.candidates.map(move => key(...destination(move)))); for (const hex of boardCells()) { const point = toPixel(hex, size, center), value = key(...hex), path = hexPath(point, size - 2); ctx.fillStyle = targetKeys.has(value) ? "rgba(54,225,120,.38)" : "rgba(213,164,154,.48)"; ctx.fill(path); ctx.strokeStyle = targetKeys.has(value) ? "#1cd768" : "rgba(142,80,75,.55)"; ctx.lineWidth = targetKeys.has(value) ? 3 : 1; ctx.stroke(path); if (state.selectedHex && same(hex, state.selectedHex)) { ctx.strokeStyle = "#ffcd3c"; ctx.lineWidth = 4; ctx.stroke(hexPath(point, size - 4)); } const piece = top(hex); if (!piece) continue; const image = imageFor(piece.type, piece.color); if (image.complete) ctx.drawImage(image, point[0] - size, point[1] - size * .862, size * 2, size * 1.724); const stack = state.board.get(value); if (stack.length > 1) { ctx.fillStyle = "#8e3f4b"; ctx.beginPath(); ctx.arc(point[0] + size * .55, point[1] + size * .55, size * .23, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = "#fff7e8"; ctx.font = `700 ${Math.max(11, size * .24)}px HiveSans`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(stack.length, point[0] + size * .55, point[1] + size * .55); } } }
+function renderHands(color) { const root = document.querySelector(`#${color}Hand`); root.replaceChildren(); for (const [id, name] of PIECES) { const button = document.createElement("button"); button.className = `piece-card ${state.selectedHand === id ? "selected" : ""}`; button.type = "button"; button.disabled = color !== state.turn || hands[color][id] === 0; const image = document.createElement("img"); image.src = asset(id, color); image.alt = name; button.append(image); const label = document.createElement("span"); label.className = "piece-name"; label.textContent = name; button.append(label); const count = document.createElement("span"); count.className = "piece-count"; count.textContent = `x${hands[color][id]}`; button.append(count); button.addEventListener("click", () => chooseHand(id)); root.append(button); } }
+function renderMenu() { const menu = document.querySelector("#actionMenu"); menu.replaceChildren(); if (state.mode === "action") for (const option of actionOptions()) { const button = document.createElement("button"); button.type = "button"; button.textContent = option; button.addEventListener("click", () => chooseAction(option)); menu.append(button); } if (["victim", "throw-destination"].includes(state.mode)) { const button = document.createElement("button"); button.type = "button"; button.textContent = "Cancel"; button.className = "cancel"; button.addEventListener("click", () => { state.mode = "action"; state.candidates = legalMoves().filter(move => source(move) && same(source(move), state.selectedHex)); render(); }); menu.append(button); } const imitation = document.querySelector("#imitationMenu"); if (imitation) { imitation.replaceChildren(); for (const type of imitationOptions()) { const button = document.createElement("button"); button.type = "button"; button.textContent = type; button.className = type === state.imitation ? "selected" : ""; button.addEventListener("click", () => { state.imitation = type; render(); }); imitation.append(button); } } }
+function render() { renderHands("white"); renderHands("black"); renderMenu(); draw(); const label = state.status === "ongoing" ? `${colorLabel(state.turn)}'s turn -- Turn ${state.turnNumber}` : state.status === "draw" ? "Draw!" : `${colorLabel(state.status.replace("-wins", ""))} wins!`; document.querySelector("#turnReadout").textContent = label; const status = document.querySelector("#statusText"); if (status) status.textContent = state.mode === "destination" ? "Choose a highlighted destination" : state.mode === "victim" ? "Choose a piece to throw" : state.mode === "throw-destination" ? "Choose a throw destination" : "Choose a piece"; }
+canvas.addEventListener("click", event => { const { rect, size, center } = geometry(); boardClick(fromPixel([event.clientX - rect.left, event.clientY - rect.top], size, center)); });
+document.querySelector("#resetButton")?.addEventListener("click", () => { state.board.clear(); hands.white = initialHand(); hands.black = initialHand(); state.turn = "white"; state.turnNumber = 1; state.lastMoved = null; state.status = "ongoing"; resetSelection(); render(); });
+window.addEventListener("resize", draw);
+render();
