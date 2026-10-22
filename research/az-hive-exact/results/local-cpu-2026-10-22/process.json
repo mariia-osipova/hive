@@ -1,0 +1,15 @@
+{
+  "pid": 1453,
+  "caffeinate_pid": 1454,
+  "command": [
+    "/Users/maria/CLionProjects/hive/research/az-hive-exact/.venv/bin/python",
+    "-u",
+    "/Users/maria/CLionProjects/hive/research/az-hive-exact/scripts/run_original.py",
+    "--config",
+    "nn_architecture/symmetries/4-layers/1",
+    "--output",
+    "/Users/maria/CLionProjects/hive/research/az-hive-exact/runs/original-symmetric-4layer-2026-10-22-run02"
+  ],
+  "log": "/Users/maria/CLionProjects/hive/research/az-hive-exact/runs/original-symmetric-4layer-2026-10-22-run02/console.log",
+  "status": "stopped_by_user"
+}

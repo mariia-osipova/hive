@@ -1,0 +1,16 @@
+{
+  "source_url": "https://www.remi-coulom.fr/Bayesian-Elo/bayeselo.tar.bz2",
+  "version": "0057",
+  "archive": "bayeselo-source.tar.bz2",
+  "sha256": "95f3d32381932ba9ccd1ab221ff33273cd3e48abedcfeba4c4f3f5a9b303a2a4",
+  "license": "GNU GPL; see original README and source headers",
+  "build": [
+    "clang++",
+    "-std=c++98",
+    "-O3",
+    "-Wall",
+    "bayeselo.cpp",
+    "-o",
+    "bayeselo"
+  ]
+}

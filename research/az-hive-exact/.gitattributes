@@ -1,0 +1,4 @@
+# Preserve raw experiment output, including progress bars and CSV line endings.
+results/**/*.log -text -whitespace
+results/**/*.csv -text -whitespace
+results/*.txt -text -whitespace

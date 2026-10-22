@@ -18,9 +18,44 @@ the original C Beekeeper source includes the minimax and rollout MCTS opponents.
 The network wrapper crops the native 26×26 board to 14×14 before inference and
 training. This is original behavior, not an unresolved dimension mismatch.
 
-## Mac runner
+## Local Mac execution
 
-The intended remote machine is `hutter-mac`, reached through Tailscale. This is a
+The active target is the user's own Mac. Remote runner setup was stopped at the
+user's request; its queued check was cancelled, and no remote runner was registered.
+
+```sh
+python3 research/az-hive-exact/scripts/bootstrap.py
+python3 -m venv research/az-hive-exact/.venv
+research/az-hive-exact/.venv/bin/python -m pip install -r research/az-hive-exact/requirements-macos.lock.txt
+research/az-hive-exact/.venv/bin/python -u research/az-hive-exact/scripts/run_original.py \
+  --config nn_architecture/symmetries/4-layers/1 \
+  --output research/az-hive-exact/runs/NEW-RUN
+```
+
+The full network has **120,883,872 parameters** including the original unused
+convolution layers. The selected published JSON uses 20 iterations, 100 self-play
+games per iteration, 25 MCTS simulations, 10 epochs, batch size 64, 40 comparison
+games, a 0.5 acceptance threshold, and five iterations of training-data history.
+Rotation/reflection augmentation is enabled. The original Coach first evaluates
+50 games against random before starting self-play and optimization.
+
+Original Python/C source files are verified before every run. The harness changes
+only the selected published configuration's module globals, output paths, CUDA
+availability, and a recorded new seed. It restores `numpy.str = str`, the alias
+used by the author's old NumPy, without editing the original source. Modern GCC
+requires `-fcommon`; signed-char behavior is set explicitly. The native library is
+built from the author's original nine translation units. Build flags and hashes
+are saved in `work/build.json`; environment, parameters, source identity and status
+are saved in each run's `run.json`. Source identity does not imply identical
+floating-point behavior across platforms.
+
+The unmodified Coach does not save training-example history during `learn()`.
+Its checkpoints preserve model weights, not an exact resumable training state.
+Do not claim a restarted run continues the same experiment.
+
+## Optional remote runner preparation
+
+The previously considered remote machine was `hutter-mac`, reached through Tailscale. This is a
 separate machine from the developer's local Mac. Register it only after obtaining
 its actual macOS SSH username:
 
@@ -37,10 +72,8 @@ installs/starts its standard macOS user service. Registration credentials are se
 over SSH stdin and are not saved in the repository.
 
 The runner uses `~/.local/share/github-actions/mariia-osipova-hive-hutter-mac`.
-The `Hutter Mac runner` workflow selects `[self-hosted, macOS, hutter-mac]`, verifies
-the actual host and pinned author source, and runs on pushes to the reproduction
-branch. There is no pull-request trigger. Registration is complete only after
-GitHub reports the runner online and this workflow succeeds.
+The draft workflow was removed when the user selected local execution. No remote
+jobs or installation are part of the active run.
 
 ## Fidelity and remaining work
 
@@ -55,5 +88,19 @@ The published `results/traditional_comparison/tournament.pgn` contains aggregate
 outcomes encoded as PGN by the authors' generator. Reanalysing it with BayesElo
 checks the published Elo calculation; it is not a fresh tournament.
 
-Full training and new tournaments are still pending. Do not describe the earlier
-small pilot or analysis of published data as completion of these experiments.
+The local original-code run was stopped at the user's request during self-play
+of iteration 1. Its initial, untrained model won 28/50 games against random;
+no optimization epochs or complete training iterations finished. The saved partial
+results are in `results/local-cpu-2026-10-22/`. Model weights remain local; their
+hash and size are recorded with the exported results. The earlier pilot and
+published-data reanalysis do not establish completion of the experiments.
+
+Recompute the published Elo analysis after bootstrap with:
+
+```sh
+python3 research/az-hive-exact/scripts/reanalyse_published_elo.py
+```
+
+The explicitly specified zero first-move advantage gives ratings differing by
+1–2 points from Figure 6. BayesElo's default advantage (32.8) reproduces its rounded
+ratings. Both outputs are retained; this discrepancy remains unresolved.

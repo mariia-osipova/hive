@@ -1,0 +1,81 @@
+{
+  "status": "inference_check_passed",
+  "pid": 778,
+  "started_utc": "2026-10-22T18:42:36.059584+00:00",
+  "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+  "published_config": "tile_relative/regular/spatial_planes_4/1",
+  "seed": 20261022,
+  "original_seeds": "not published; this seed is a new local repetition",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "torch": "2.14.1",
+  "numpy": "2.3.2",
+  "device": "cpu",
+  "torch_threads": 4,
+  "action_size": 1695,
+  "parameters": 120883872,
+  "use_symmetries": false,
+  "published_training": {
+    "numIters": 20,
+    "numEps": 100,
+    "tempThreshold": 15,
+    "updateThreshold": 0.5,
+    "maxlenOfQueue": 200000,
+    "numMCTSSims": 25,
+    "arenaCompare": 40,
+    "cpuct": 0.8,
+    "checkpoint": "./temp/",
+    "load_model": false,
+    "load_folder_file": [
+      "./temp/",
+      "best.pth.tar"
+    ],
+    "numItersForTrainExamplesHistory": 20,
+    "results": "xperiment_results/1_relative_original"
+  },
+  "published_network": {
+    "lr": 0.001,
+    "dropout": 0.3,
+    "epochs": 10,
+    "batch_size": 64,
+    "cuda": true,
+    "num_channels": 256,
+    "data_representation_method": 4,
+    "num_layers": 4,
+    "results": "xperiment_results/1_relative_original"
+  },
+  "effective_training": {
+    "numIters": 20,
+    "numEps": 100,
+    "tempThreshold": 15,
+    "updateThreshold": 0.5,
+    "maxlenOfQueue": 200000,
+    "numMCTSSims": 25,
+    "arenaCompare": 40,
+    "cpuct": 0.8,
+    "checkpoint": "/Users/maria/CLionProjects/hive/research/az-hive-exact/runs/original-inference-check-2026-10-22/checkpoints",
+    "load_model": false,
+    "load_folder_file": [
+      "./temp/",
+      "best.pth.tar"
+    ],
+    "numItersForTrainExamplesHistory": 20,
+    "results": "/Users/maria/CLionProjects/hive/research/az-hive-exact/runs/original-inference-check-2026-10-22"
+  },
+  "effective_network": {
+    "lr": 0.001,
+    "dropout": 0.3,
+    "epochs": 10,
+    "batch_size": 64,
+    "cuda": false,
+    "num_channels": 256,
+    "data_representation_method": 4,
+    "num_layers": 4,
+    "results": "/Users/maria/CLionProjects/hive/research/az-hive-exact/runs/original-inference-check-2026-10-22"
+  },
+  "environment_differences": [
+    "macOS arm64 CPU instead of Linux/NVIDIA CUDA",
+    "modern Python/PyTorch/NumPy"
+  ],
+  "algorithm_source_edits": []
+}
