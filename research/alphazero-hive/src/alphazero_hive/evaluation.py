@@ -231,8 +231,11 @@ def main(argv=None):
     agents = {}
     if not args.speed_only:
         untrained = HiveNet(game)
+        # Compare to the exact initialization of this training run, not a new
+        # random network drawn from the evaluation seed.
+        untrained.load_checkpoint(args.run / "checkpoints", "initial.pt")
         agents = {"trained": NetworkAgent(game, trained, config["search"]),
-                  "untrained": NetworkAgent(game, untrained, config["search"])}
+                  "initial": NetworkAgent(game, untrained, config["search"])}
     constructors = {"random": lambda: RandomAgent(game), "minimax": lambda: MinimaxAgent(game),
                     "rollout": lambda: RolloutMCTSAgent(game, config["search"]["simulations"])}
     if not args.speed_only:
@@ -247,6 +250,11 @@ def main(argv=None):
               "elo_method": "regularized logistic fit, draws=half-point, centered at 1000; not BayesElo",
               "baseline_provenance": "Local minimax and rollout MCTS; not the paper's Beekeeper agents",
               "elo": elo_ratings(list(agents), pairs)}
+    report["checkpoints"] = {
+        name: {"filename": filename,
+               "sha256": hashlib.sha256((args.run / "checkpoints" / filename).read_bytes()).hexdigest()}
+        for name, filename in (("trained", args.checkpoint), ("initial", "initial.pt"))
+        if name == "trained" or not args.speed_only}
     if args.speed_simulations:
         report["speed_samples"] = benchmark_speed(game, trained, config["search"], args.speed_simulations,
                                                   args.speed_positions, args.speed_repeats, args.seed)

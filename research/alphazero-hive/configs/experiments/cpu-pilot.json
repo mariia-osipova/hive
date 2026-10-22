@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "cpu-pilot-hybrid-relative-seed-1",
+  "rules_config": "../rules/paper-modified.json",
+  "representation_config": "../representations/paper-hybrid.json",
+  "seed": 1,
+  "symmetries": true,
+  "search": {"simulations": 25, "cpuct": 0.8, "dirichlet_alpha": 0.3, "dirichlet_fraction": 0.25},
+  "network": {
+    "layers": 4, "channels": 32, "hidden": [256, 128], "dropout": 0.3,
+    "learning_rate": 0.001, "epochs": 3, "batch_size": 64, "device": "cpu"
+  },
+  "training": {
+    "iterations": 6, "self_play_games": 10, "temperature_threshold": 15,
+    "replay_iterations": 3, "max_examples": 10000,
+    "arena_games": 40, "promotion_threshold": 0.55, "random_games": 20, "max_seconds": 1800
+  },
+  "runtime": {"threads": 1}
+}

@@ -202,3 +202,17 @@ def test_search_speed_samples_preserve_reproducible_positions(config):
     assert samples[2]["position_key_sha256"] == samples[3]["position_key_sha256"]
     assert samples[0]["position_key_sha256"] != samples[2]["position_key_sha256"]
     assert all(sample["seconds_per_move"] > 0 for sample in samples)
+
+
+def test_evaluation_loads_the_actual_initial_checkpoint(config, tmp_path):
+    import hashlib
+    from alphazero_hive.evaluation import main
+    destination = tmp_path / "pilot"
+    run(config, destination, stop_after=1)
+    output = tmp_path / "evaluation.json"
+    main(["--run", str(destination), "--games", "2", "--seed", "300001", "--output", str(output)])
+    report = json.loads(output.read_text())
+    expected = hashlib.sha256((destination / "checkpoints/initial.pt").read_bytes()).hexdigest()
+    assert report["checkpoints"]["initial"]["sha256"] == expected
+    pairs = {(pair["first"], pair["second"]) for pair in report["pairs"]}
+    assert pairs == {("trained", "initial"), ("trained", "random"), ("initial", "random")}
