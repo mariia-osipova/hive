@@ -1,0 +1,39 @@
+{
+  "analysis": "Published aggregate PGN reanalysis; no new games or training",
+  "pgn_sha256": "8a70258ebee2e16960894deab01ae61dcd2cf3b7e3288b06e7ce6d108c62c134",
+  "published_figure_6": {
+    "mm": 1355,
+    "mcts": 1181,
+    "nn": 1063,
+    "4h": 919,
+    "random": 778,
+    "untrained": 704
+  },
+  "analyses": {
+    "paper-zero-advantage": {
+      "ratings": {
+        "mm": 1353,
+        "mcts": 1179,
+        "nn": 1063,
+        "4h": 920,
+        "random": 780,
+        "untrained": 705
+      },
+      "matches_published_rounded_ratings": false,
+      "commands": "readpgn AUTHOR/results/traditional_comparison/tournament.pgn\nelo\nadvantage 0\nmm\nexactdist\noffset 1000\nratings\nx\nx\n"
+    },
+    "bayeselo-default-advantage": {
+      "ratings": {
+        "mm": 1355,
+        "mcts": 1181,
+        "nn": 1063,
+        "4h": 919,
+        "random": 778,
+        "untrained": 704
+      },
+      "matches_published_rounded_ratings": true,
+      "commands": "readpgn AUTHOR/results/traditional_comparison/tournament.pgn\nelo\nadvantage\nmm\nexactdist\noffset 1000\nratings\nx\nx\n"
+    }
+  },
+  "finding": "Default first-move advantage 32.8 reproduces Figure 6; explicitly setting 0 as described in the paper gives slightly different ratings. The cause is unresolved."
+}

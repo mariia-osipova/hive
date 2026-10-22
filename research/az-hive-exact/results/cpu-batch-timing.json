@@ -1,0 +1,12 @@
+{
+  "purpose": "CPU runtime estimate only; synthetic batches; not a research result or training run",
+  "batch_size": 64,
+  "parameters": 120883872,
+  "torch_threads": 4,
+  "batch_seconds": [
+    1.9537175410077907,
+    1.6739329579868354,
+    1.1389391660341062
+  ],
+  "concurrent_original_run_pid": 1453
+}

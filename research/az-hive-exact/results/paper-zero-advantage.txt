@@ -1,0 +1,21 @@
+version 0057, Copyright (C) 1997-2010 Remi Coulom.
+compiled Oct 22 2026 15:51:09.
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it
+under the terms and conditions of the GNU General Public License.
+See http://www.gnu.org/copyleft/gpl.html for details.
+ResultSet>ResultSet>ResultSet-EloRating>0
+ResultSet-EloRating>00:00:00,00
+ResultSet-EloRating>0 left    
+00:00:00,00              
+ResultSet-EloRating>1000
+ResultSet-EloRating>Rank Name        Elo    +    - games score oppo. draws 
+   1 mm         1353   38   35   500   87%   929    0% 
+   2 mcts       1179   31   30   500   71%   964    0% 
+   3 nn         1063   28   28   500   58%   987    0% 
+   4 4h          920   28   28   500   41%  1016    0% 
+   5 random      780   30   31   500   26%  1044    0% 
+   6 untrained   705   32   34   500   18%  1059    0% 
+ResultSet-EloRating>ResultSet>
+1000 game(s) loaded, 0 game(s) with unknown result ignored.
+1500 game(s) loaded, 0 game(s) with unknown result ignored.

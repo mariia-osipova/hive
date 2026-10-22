@@ -1,0 +1,27 @@
+{
+  "status": "stopped_by_user",
+  "experiment": "Original author Coach/C engine/full CNN on local Mac CPU",
+  "published_config": "nn_architecture/symmetries/4-layers/1",
+  "parameters": 120883872,
+  "initial_untrained_evaluation": {
+    "games": 50,
+    "wins": 28,
+    "losses": 22,
+    "draws": 0,
+    "win_rate": 0.56
+  },
+  "completed_self_play_games_iteration_1": 47,
+  "completed_training_iterations": 0,
+  "completed_optimization_epochs": 0,
+  "checkpoint_files": [
+    {
+      "filename": "initial.pth.tar",
+      "bytes": 483623813,
+      "sha256": "c0176617698559ff09cef2e8d094dbf9a8578e5d310659c9e57c7f698c2faa7e",
+      "uploaded": false,
+      "reason": "Untrained initial weights, 461 MiB; retained in the local run directory"
+    }
+  ],
+  "exact_resume_available": false,
+  "interpretation": "Partial execution evidence only; no trained-model strength result and no full paper reproduction"
+}
