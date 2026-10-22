@@ -20,8 +20,8 @@ training. This is original behavior, not an unresolved dimension mismatch.
 
 ## Local Mac execution
 
-The active target is the user's own Mac. Remote runner setup was stopped at the
-user's request; its queued check was cancelled, and no remote runner was registered.
+The local runtime was checked on Apple Silicon with Python 3.12.6 and Homebrew
+GNU GCC 15 with OpenMP. Install GCC with `brew install gcc` if it is missing.
 
 ```sh
 python3 research/az-hive-exact/scripts/bootstrap.py
@@ -52,28 +52,6 @@ floating-point behavior across platforms.
 The unmodified Coach does not save training-example history during `learn()`.
 Its checkpoints preserve model weights, not an exact resumable training state.
 Do not claim a restarted run continues the same experiment.
-
-## Optional remote runner preparation
-
-The previously considered remote machine was `hutter-mac`, reached through Tailscale. This is a
-separate machine from the developer's local Mac. Register it only after obtaining
-its actual macOS SSH username:
-
-```sh
-python3 scripts/register-mac-runner.py --tailscale --ssh USER@hutter-mac
-```
-
-This requires the existing authenticated `gh` session to have repository admin
-access, and an authorized SSH login on the selected Mac. A Tailscale account email
-does not identify the macOS login. The installer checks the operating system and
-architecture, downloads the official GitHub runner release, verifies its SHA256,
-registers it for `mariia-osipova/hive` with `hutter-mac` and `az-hive` labels, and
-installs/starts its standard macOS user service. Registration credentials are sent
-over SSH stdin and are not saved in the repository.
-
-The runner uses `~/.local/share/github-actions/mariia-osipova-hive-hutter-mac`.
-The draft workflow was removed when the user selected local execution. No remote
-jobs or installation are part of the active run.
 
 ## Fidelity and remaining work
 
