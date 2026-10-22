@@ -1,0 +1,36 @@
+name: Hutter Mac runner
+
+on:
+  push:
+    branches: [research/az-hive-exact-reproduction]
+    paths:
+      - .github/workflows/hutter-mac.yml
+      - research/az-hive-exact/**
+      - scripts/register-mac-runner.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hutter-mac-check
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: [self-hosted, macOS, hutter-mac]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify host and pinned author source
+        shell: bash
+        run: |
+          set -eu
+          export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+          hostname
+          sw_vers
+          uname -m
+          sysctl -n hw.memsize
+          python3 research/az-hive-exact/scripts/verify_source.py
