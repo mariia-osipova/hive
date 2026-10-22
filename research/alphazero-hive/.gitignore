@@ -1,0 +1,11 @@
+**/build/
+**/__pycache__/
+**/*.py[cod]
+**/*.so
+/runs/*
+!/runs/.gitkeep
+/references/beekeeper/*
+!/references/beekeeper/UPSTREAM.md
+.DS_Store
+.venv/
+.pytest_cache/

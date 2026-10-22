@@ -21,3 +21,11 @@ and movement for the main Hive pieces.
 The placement sound is loaded from
 `sounds/ElevenLabs_satisfying_card_flip_asmr.mp3`. Add that file before
 deploying if audio is needed.
+
+## AI research
+
+The AlphaZero Hive experiment workspace is in
+[`research/alphazero-hive/`](research/alphazero-hive/README.md). It contains the
+team's C++ engine snapshot, experiment architecture and base-Hive configuration.
+The local Beekeeper reference copy is excluded from version control pending
+license clarification.

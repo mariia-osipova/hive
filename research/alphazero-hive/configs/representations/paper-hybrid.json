@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "name": "hybrid-relative-v1",
+  "observation": "hybrid",
+  "action_encoding": "relative",
+  "input_shape": [4, 26, 26],
+  "policy_shape_without_pass": [22, 7, 11],
+  "pass_index": 1694,
+  "action_size": 1695,
+  "perspective": "side-to-move",
+  "status": "tested-paper-inspired-adaptation",
+  "differences": [
+    "Directions use native axial order, not Beekeeper numbering.",
+    "Reference is the lowest stable tile ID among stationary adjacent/underlying pieces.",
+    "Occupied bounding box is centered independently for each symmetry.",
+    "Rule state and repetition history stay in the native object, outside the observation."
+  ]
+}

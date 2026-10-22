@@ -1,0 +1,29 @@
+[build-system]
+requires = ["scikit-build-core>=0.10", "pybind11>=2.13"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "alphazero-hive"
+version = "0.1.0"
+description = "Research engine and bindings for AlphaZero experiments on base Hive"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26,<3"]
+
+[project.optional-dependencies]
+train = ["torch>=2.2,<3", "tqdm>=4.66,<5"]
+test = ["pytest>=8,<10"]
+
+[project.scripts]
+hive-train = "alphazero_hive.runner:main"
+hive-evaluate = "alphazero_hive.evaluation:main"
+hive-experiments = "alphazero_hive.experiments:main"
+
+[tool.scikit-build]
+cmake.source-dir = "../.."
+wheel.packages = ["../../src/alphazero_hive"]
+build-dir = "../../build/python"
+
+[tool.scikit-build.cmake.define]
+HIVE_BUILD_TESTS = "OFF"
+HIVE_BUILD_GUI = "OFF"
+HIVE_BUILD_PYTHON = "ON"

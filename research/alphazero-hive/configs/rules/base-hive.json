@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "name": "base-hive-paper-profile",
+  "ruleset_era": "base pieces, paper-era tournament opening",
+  "expansions": false,
+  "pieces_per_player": {
+    "queen": 1,
+    "spider": 2,
+    "beetle": 2,
+    "grasshopper": 3,
+    "ant": 3
+  },
+  "opening": {
+    "first_player_first_piece": "any_cell_non_queen",
+    "second_player_first_piece": "adjacent_to_first_non_queen",
+    "subsequent_piece_must_touch_own_color": true,
+    "subsequent_piece_must_avoid_opponent_color": true
+  },
+  "queen_placement": {
+    "first_allowed_own_turn": 2,
+    "last_allowed_own_turn": 4,
+    "movement_locked_until_placed": true
+  },
+  "movement": {
+    "one_hive": true,
+    "freedom_to_move": true
+  },
+  "win": {
+    "queen_surround_count": 6,
+    "simultaneous_surround": "draw"
+  },
+  "pass_if_no_legal_action": true,
+  "repetition": {
+    "occurrences": 3,
+    "outcome": "draw",
+    "position_includes_side_to_move": true
+  },
+  "turn_limit": null
+}

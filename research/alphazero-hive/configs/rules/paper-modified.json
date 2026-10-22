@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "paper-inspired-29-ply-adaptation",
+  "profile": "base",
+  "options": {
+    "queen_surround_count": 4,
+    "max_plies": 29,
+    "repetition_draw_occurrences": 0,
+    "black_wins_ties": true
+  },
+  "note": "The pinned author's backend starts at turn=0 and adjudicates at MAX_TURNS-1 with default MAX_TURNS=30: 29 plies. This adaptation follows that cap but awards ties to black as described in the paper; the snapshot's cap expression instead favors white. See docs/paper-audit.md."
+}

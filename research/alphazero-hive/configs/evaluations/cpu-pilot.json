@@ -1,0 +1,13 @@
+{
+  "name": "cpu-pilot-holdout-v1",
+  "training_config": "../experiments/cpu-pilot.json",
+  "games_per_pair": 100,
+  "seed": 300001,
+  "baselines": ["random"],
+  "checkpoints": {"trained": "best.pt", "initial": "initial.pt"},
+  "mcts_simulations": 25,
+  "color_assignment": "50 white, 50 black for each agent per pair",
+  "interval": "95% bootstrap over color-swapped pairs; 10000 resamples, RNG seed 90210",
+  "success_criterion": "Both the trained-vs-initial win-rate interval lower bound exceeds 0.5 and the trained-minus-initial random win-rate interval lower bound exceeds zero.",
+  "limitations": "One training seed and modified 29-ply rules. Evaluation is held out from promotion/random-monitor seeds. No parameter or checkpoint selection based on these holdout results."
+}

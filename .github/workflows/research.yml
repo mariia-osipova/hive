@@ -1,0 +1,39 @@
+name: AlphaZero Hive checks
+
+on:
+  push:
+    paths: ['research/alphazero-hive/**', '.github/workflows/research.yml']
+  pull_request:
+    paths: ['research/alphazero-hive/**', '.github/workflows/research.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  core-and-training:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: research/alphazero-hive
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install C++ test dependency
+        run: sudo apt-get update && sudo apt-get install -y libgtest-dev
+      - name: Build and test core
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DHIVE_BUILD_GUI=OFF
+          cmake --build build --target hive_tests -j 2
+          ctest --test-dir build --output-on-failure
+      - name: Install Python package and CPU training dependencies
+        run: |
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e 'bindings/python[train,test]'
+      - name: Check encodings, training and deterministic resume
+        run: python -m pytest tests/python -q
+      - name: Exercise CLI and resume
+        run: |
+          python -m alphazero_hive.runner --config configs/experiments/smoke.json --run-dir runs/ci --stop-after 1
+          python -m alphazero_hive.runner --run-dir runs/ci --resume
