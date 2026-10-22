@@ -1,0 +1,268 @@
+{
+  "purpose": "One-seed compact-model pilot, not paper reproduction",
+  "manifest": {
+    "format_version": 1,
+    "created_utc": "2026-10-22T18:00:53.906326+00:00",
+    "status": "complete",
+    "config": {
+      "schema_version": 1,
+      "name": "cpu-pilot-hybrid-relative-seed-1",
+      "seed": 1,
+      "symmetries": true,
+      "search": {
+        "simulations": 25,
+        "cpuct": 0.8,
+        "dirichlet_alpha": 0.3,
+        "dirichlet_fraction": 0.25
+      },
+      "network": {
+        "layers": 4,
+        "channels": 32,
+        "hidden": [
+          256,
+          128
+        ],
+        "dropout": 0.3,
+        "learning_rate": 0.001,
+        "epochs": 3,
+        "batch_size": 64,
+        "device": "cpu"
+      },
+      "training": {
+        "iterations": 6,
+        "self_play_games": 10,
+        "temperature_threshold": 15,
+        "replay_iterations": 3,
+        "max_examples": 10000,
+        "arena_games": 40,
+        "promotion_threshold": 0.55,
+        "random_games": 20,
+        "max_seconds": 1800
+      },
+      "runtime": {
+        "threads": 1
+      },
+      "rules": {
+        "schema_version": 1,
+        "name": "paper-inspired-29-ply-adaptation",
+        "profile": "base",
+        "options": {
+          "queen_surround_count": 4,
+          "max_plies": 29,
+          "repetition_draw_occurrences": 0,
+          "black_wins_ties": true
+        },
+        "note": "The pinned author's backend starts at turn=0 and adjudicates at MAX_TURNS-1 with default MAX_TURNS=30: 29 plies. This adaptation follows that cap but awards ties to black as described in the paper; the snapshot's cap expression instead favors white. See docs/paper-audit.md."
+      },
+      "representation": {
+        "schema_version": 1,
+        "name": "hybrid-relative-v1",
+        "observation": "hybrid",
+        "action_encoding": "relative",
+        "input_shape": [
+          4,
+          26,
+          26
+        ],
+        "policy_shape_without_pass": [
+          22,
+          7,
+          11
+        ],
+        "pass_index": 1694,
+        "action_size": 1695,
+        "perspective": "side-to-move",
+        "status": "tested-paper-inspired-adaptation",
+        "differences": [
+          "Directions use native axial order, not Beekeeper numbering.",
+          "Reference is the lowest stable tile ID among stationary adjacent/underlying pieces.",
+          "Occupied bounding box is centered independently for each symmetry.",
+          "Rule state and repetition history stay in the native object, outside the observation."
+        ]
+      }
+    },
+    "provenance": {
+      "git_commit": "dab515fc64e948b1fa34fd798f0d49bf8eb4198c",
+      "git_dirty": false,
+      "source_sha256": "f84ddbfddc3dbd3f6bdffb79cdff9c32d6aa8e8c8cb4dac27cc1b0db70a03ea5",
+      "alpha_zero_general_commit": "f1a78e0505c614205f8c60eaa82cd644a07a84b3",
+      "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "torch": "2.11.0",
+      "numpy": "2.3.2",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "compiler": "Apple clang version 17.0.0 (clang-1700.6.4.2)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+      "build": "C++17, scikit-build-core Release, SFML disabled",
+      "accelerator": "CPU/MPS host"
+    },
+    "resume_granularity": "completed iteration; interrupted iteration is replayed",
+    "completed_iterations": 6
+  },
+  "fixed_evaluation_protocol": {
+    "name": "cpu-pilot-holdout-v1",
+    "training_config": "../experiments/cpu-pilot.json",
+    "games_per_pair": 100,
+    "seed": 300001,
+    "baselines": [
+      "random"
+    ],
+    "checkpoints": {
+      "trained": "best.pt",
+      "initial": "initial.pt"
+    },
+    "mcts_simulations": 25,
+    "color_assignment": "50 white, 50 black for each agent per pair",
+    "interval": "95% bootstrap over color-swapped pairs; 10000 resamples, RNG seed 90210",
+    "success_criterion": "Both the trained-vs-initial win-rate interval lower bound exceeds 0.5 and the trained-minus-initial random win-rate interval lower bound exceeds zero.",
+    "limitations": "One training seed and modified 29-ply rules. Evaluation is held out from promotion/random-monitor seeds. No parameter or checkpoint selection based on these holdout results."
+  },
+  "holdout": {
+    "trained_vs_random": {
+      "estimate": 0.72,
+      "ci95": [
+        0.63,
+        0.8
+      ],
+      "wins": 72,
+      "losses": 28,
+      "draws": 0,
+      "games": 100,
+      "white_wins": 34,
+      "black_wins": 38
+    },
+    "initial_vs_random": {
+      "estimate": 0.72,
+      "ci95": [
+        0.63,
+        0.8
+      ],
+      "wins": 72,
+      "losses": 28,
+      "draws": 0,
+      "games": 100,
+      "white_wins": 34,
+      "black_wins": 38
+    },
+    "trained_vs_initial": {
+      "estimate": 0.5,
+      "ci95": [
+        0.5,
+        0.5
+      ],
+      "wins": 50,
+      "losses": 50,
+      "draws": 0,
+      "games": 100,
+      "white_wins": 26,
+      "black_wins": 24
+    },
+    "random_win_rate_difference": {
+      "estimate": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "positive_signal_criterion_met": false,
+    "uncertainty": "95% percentile bootstrap over color-swapped pairs, paired model-vs-random difference",
+    "bootstrap_seed": 90210,
+    "resamples": 10000,
+    "interpretation": "pilot does not establish improved playing strength"
+  },
+  "training_resources": {
+    "peak_process_rss_bytes": 723075072,
+    "wall_seconds": 347.41,
+    "user_seconds": 294.75,
+    "system_seconds": 42.91,
+    "measurement": "macOS /usr/bin/time -l"
+  },
+  "resource_probe": {
+    "provenance": {
+      "git_commit": "5aefc071f65abe3b8a25c88fd73cd0b9907bd89f",
+      "git_dirty": true,
+      "source_sha256": "73c1fb34e13b3310fcfd3209c4c9982ab012a1591bc53d9a9293d802c0af2b0a",
+      "alpha_zero_general_commit": "f1a78e0505c614205f8c60eaa82cd644a07a84b3",
+      "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "torch": "2.11.0",
+      "numpy": "2.3.2",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "compiler": "Apple clang version 17.0.0 (clang-1700.6.4.2)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+      "build": "C++17, scikit-build-core Release, SFML disabled",
+      "accelerator": "CPU/MPS host"
+    },
+    "paper_architecture": {
+      "parameters": 521174688,
+      "float32_weights_bytes": 2084698752,
+      "two_models_two_adam_states_and_gradient_bytes": 14592891264,
+      "estimated_parameter_peak_with_runner_deepcopy_bytes": 20846987520,
+      "estimate_excludes": "activations, replay, Python/framework, serialization, allocator overhead",
+      "method": "meta-device parameter count; float32 parameter/optimizer accounting, not measured RSS"
+    },
+    "pilot_architecture": {
+      "parameters": 4246816,
+      "float32_weights_bytes": 16987264,
+      "two_models_two_adam_states_and_gradient_bytes": 118910848,
+      "estimated_parameter_peak_with_runner_deepcopy_bytes": 169872640,
+      "estimate_excludes": "activations, replay, Python/framework, serialization, allocator overhead",
+      "method": "meta-device parameter count; float32 parameter/optimizer accounting, not measured RSS"
+    },
+    "measurements": [
+      {
+        "threads": 1,
+        "inference_median_seconds": 0.0006050414813216776,
+        "mcts_simulations": 25,
+        "opening_move_median_seconds": 0.02169554098509252,
+        "two_training_batches_seconds": 0.2632885000202805,
+        "batch_size": 64,
+        "process_peak_rss_bytes": 498794496,
+        "note": "Opening search and repeated synthetic batch; pilot run measures real positions and replay"
+      },
+      {
+        "threads": 2,
+        "inference_median_seconds": 0.0010287290206179023,
+        "mcts_simulations": 25,
+        "opening_move_median_seconds": 0.034230625024065375,
+        "two_training_batches_seconds": 0.1769450000138022,
+        "batch_size": 64,
+        "process_peak_rss_bytes": 517767168,
+        "note": "Opening search and repeated synthetic batch; pilot run measures real positions and replay"
+      },
+      {
+        "threads": 4,
+        "inference_median_seconds": 0.0013993959873914719,
+        "mcts_simulations": 25,
+        "opening_move_median_seconds": 0.04021083301631734,
+        "two_training_batches_seconds": 0.18588270799955353,
+        "batch_size": 64,
+        "process_peak_rss_bytes": 528433152,
+        "note": "Opening search and repeated synthetic batch; pilot run measures real positions and replay"
+      }
+    ]
+  },
+  "checkpoints": {
+    "trained": {
+      "filename": "best.pt",
+      "sha256": "aab1dfeb7bb508f2deb92478967addba48dca92e2d24d3b02f1dd6d6958b6b45"
+    },
+    "initial": {
+      "filename": "initial.pt",
+      "sha256": "18ed58a0667ff18a582679deb7bb690e0c367d01e63f2edfcac229c13d43b5eb"
+    }
+  },
+  "network_state_sha256": {
+    "initial": "ec0db28755848dd773171c1c7cbdb7b69a797c4b24cadc456d49faaa603d784a",
+    "selected_final": "ec0db28755848dd773171c1c7cbdb7b69a797c4b24cadc456d49faaa603d784a"
+  },
+  "selected_model_changed": false,
+  "accepted_iterations": [],
+  "total_self_play_games": 60,
+  "validation": {
+    "local_python_tests_passed": 38,
+    "training_source_ci": "https://github.com/mariia-osipova/hive/actions/runs/39827943689"
+  },
+  "report_environment": {
+    "matplotlib": "3.10.7"
+  },
+  "measured_energy": null
+}

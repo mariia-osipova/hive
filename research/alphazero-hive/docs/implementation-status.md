@@ -16,6 +16,10 @@ Python tests cover action injectivity and round trips, stacks, first placement, 
 
 C++ tests include movement fixtures for every piece, one-hive/sliding/stacking, queen status, Pass/repetition, cap/clone behavior and the Beetle gate regression. A short real self-play/training/arena run is recorded in `experiments/pipeline-smoke-2026-10-22.md`.
 
+## First CPU pilot
+
+The first compact CPU pilot is complete: six iterations / 60 self-play games, 347.41 s wall time, 723,075,072-byte peak RSS. None of six candidates passed promotion, so the selected network remains the exact initialization. In 300 held-out matches with seeds separate from training, both initial and selected models scored 72/100 against random and 50:50 head to head. No playing-strength gain was established. Results, plots and model fingerprints: [`cpu-pilot-2026-10-22`](../experiments/cpu-pilot-2026-10-22/README.md).
+
 ## Still required for a complete paper reproduction
 
 - Resolve the paper/code differences in board dimensions, cap semantics, tie adjudication and representation transforms; see `paper-audit.md`.

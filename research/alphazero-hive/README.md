@@ -34,6 +34,21 @@ python -m alphazero_hive.experiments --base configs/experiments/paper-inspired.j
 
 Каждый каталог запуска содержит resolved config и provenance в `manifest.json`, метрики итераций и эпох в CSV, отчёты арены, начальную/выбранную/кандидатные модели и `latest.pt` с optimizer, replay buffer и RNG. `--resume` продолжает с последней полностью сохранённой итерации; незаконченная итерация выполняется заново. `--stop-after N` позволяет проверить resume без изменения конфига. Существующий каталог не перезаписывается новым запуском. Временной бюджет проверяется между итерациями и может быть превышен на одну итерацию.
 
+## Первый CPU-пилот
+
+Пилот завершил 6 итераций и 60 self-play партий за 5 мин 47 с, с пиком RSS 690 МиБ. Из шести кандидатов отбор не прошёл ни один; выбранная модель сохранила начальные веса. На независимых 300 матчах начальная и конечная модели обе выиграли у random 72/100, а между собой сыграли 50:50. Этот запуск не показал улучшения игровой силы.
+
+Протокол зафиксирован до обучения в [cpu-pilot-protocol](experiments/cpu-pilot-protocol-2026-10-22.md). [Отчёт и графики](experiments/cpu-pilot-2026-10-22/README.md) содержат raw match outcomes, CI по цветосбалансированным парам, проверку идентичности весов, измерения ресурсов и resolved config. Сравнение в CLI теперь загружает точный `initial.pt` этого запуска.
+
+```sh
+python benchmarks/pilot_probe.py --pilot configs/experiments/cpu-pilot.json --paper configs/experiments/paper-inspired.json --output runs/local-probe.json
+/usr/bin/time -l python -m alphazero_hive.runner --config configs/experiments/cpu-pilot.json --run-dir runs/local-pilot 2> runs/local-pilot.resources.log
+python -m alphazero_hive.evaluation --run runs/local-pilot --games 100 --seed 300001 --baselines random --output runs/local-pilot/evaluation.json
+python scripts/report_pilot.py --run runs/local-pilot --evaluation runs/local-pilot/evaluation.json --probe runs/local-probe.json --output experiments/local-pilot
+```
+
+Для графиков нужен Matplotlib; проверенная версия добавлена в `requirements-cpu-tested.txt`. Измерение `/usr/bin/time -l` и парсер отчёта рассчитаны на macOS. Пилот использует компактную сеть 4,25 млн параметров: расчётная память paper-сети с текущим runner превышает доступные 16 ГиБ. Её 521 млн параметров посчитаны на meta device без выделения памяти под веса.
+
 ## Граница воспроизведения
 
 Это проверенная **адаптация подхода статьи**, а не заявление о воспроизведении всех её численных результатов. Отличия правил, представлений, оптимизатора, движка и оценки перечислены в [paper-audit.md](docs/paper-audit.md). Наши minimax, rollout MCTS и logistic Elo отличаются от Beekeeper и BayesElo авторов. Длинные запуски и аппаратные измерения энергии ещё не выполнены.
