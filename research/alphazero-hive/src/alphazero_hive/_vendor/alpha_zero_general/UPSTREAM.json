@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/suragnair/alpha-zero-general",
+  "commit": "f1a78e0505c614205f8c60eaa82cd644a07a84b3",
+  "changes": "Only package-relative imports in Coach.py and Arena.py.",
+  "upstream_sha256": {
+    "Game.py": "4e5333df509033e07d8cad1f8a3fd4d0cf1de0616ea40e7715c05e40714ee91d",
+    "NeuralNet.py": "fbad0a5245d67b09ccd5ce036a38e4c4731302d950aa2a38d49b0a256ce517d6",
+    "MCTS.py": "197e86bca3cac861faad7190cab6a702d1e2daf571e29faf87a42fa428600691",
+    "Coach.py": "1ab002e44034a2bb729f1a82cf23a95e3e2a113fe61fd769f5ca2e5fb2d3774c",
+    "Arena.py": "72a50975bf209be8b2eac8b45d80d1a93f45f3dd540e782f8c7934e733d7684c",
+    "utils.py": "24c67ce3ea326aba53b5f9fd9916db0a47fa5983a3374ef5b63b99c682fcb268",
+    "LICENSE": "a887ff1b6245a58dec9c0f579eba6148013c9bbbac68f1a84a702e9bcacf2f11"
+  }
+}

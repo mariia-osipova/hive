@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "hybrid-relative-paper-inspired",
+  "rules_config": "../rules/paper-modified.json",
+  "representation_config": "../representations/paper-hybrid.json",
+  "seed": 1,
+  "symmetries": false,
+  "search": {"simulations": 25, "cpuct": 0.8, "dirichlet_alpha": 0.3, "dirichlet_fraction": 0.0},
+  "network": {
+    "layers": 4, "channels": 256, "hidden": [4096, 2048], "dropout": 0.3,
+    "learning_rate": 0.001, "epochs": 10, "batch_size": 64, "device": "cpu"
+  },
+  "training": {
+    "iterations": 20, "self_play_games": 100, "temperature_threshold": 15,
+    "replay_iterations": 20, "max_examples": 200000,
+    "arena_games": 40, "promotion_threshold": 0.5, "random_games": 50, "max_seconds": 14400
+  },
+  "runtime": {"threads": 1}
+}

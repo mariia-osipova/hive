@@ -1,0 +1,6 @@
+# Direct runtime/test versions used for the macOS arm64 CPU validation.
+# Build dependencies are specified separately by bindings/python/pyproject.toml.
+numpy==2.3.2
+torch==2.11.0
+tqdm==4.67.3
+pytest==9.0.2

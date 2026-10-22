@@ -1,0 +1,379 @@
+{
+  "purpose": "Engineering smoke validation, not reproduced paper playing-strength or energy results",
+  "manifest": {
+    "format_version": 1,
+    "created_utc": "2026-10-22T17:45:37.612706+00:00",
+    "status": "complete",
+    "config": {
+      "schema_version": 1,
+      "name": "cpu-smoke-not-paper-results",
+      "seed": 1,
+      "symmetries": true,
+      "search": {
+        "simulations": 2,
+        "cpuct": 0.8,
+        "dirichlet_alpha": 0.3,
+        "dirichlet_fraction": 0.25
+      },
+      "network": {
+        "layers": 4,
+        "channels": 4,
+        "hidden": [
+          32,
+          16
+        ],
+        "dropout": 0.0,
+        "learning_rate": 0.001,
+        "epochs": 1,
+        "batch_size": 16,
+        "device": "cpu"
+      },
+      "training": {
+        "iterations": 2,
+        "self_play_games": 1,
+        "temperature_threshold": 15,
+        "replay_iterations": 2,
+        "max_examples": 2000,
+        "arena_games": 2,
+        "promotion_threshold": 0.5,
+        "random_games": 2,
+        "max_seconds": 0
+      },
+      "runtime": {
+        "threads": 1
+      },
+      "rules": {
+        "schema_version": 1,
+        "name": "paper-inspired-29-ply-adaptation",
+        "profile": "base",
+        "options": {
+          "queen_surround_count": 4,
+          "max_plies": 29,
+          "repetition_draw_occurrences": 0,
+          "black_wins_ties": true
+        },
+        "note": "The pinned author's backend starts at turn=0 and adjudicates at MAX_TURNS-1 with default MAX_TURNS=30: 29 plies. This adaptation follows that cap but awards ties to black as described in the paper; the snapshot's cap expression instead favors white. See docs/paper-audit.md."
+      },
+      "representation": {
+        "schema_version": 1,
+        "name": "hybrid-relative-v1",
+        "observation": "hybrid",
+        "action_encoding": "relative",
+        "input_shape": [
+          4,
+          26,
+          26
+        ],
+        "policy_shape_without_pass": [
+          22,
+          7,
+          11
+        ],
+        "pass_index": 1694,
+        "action_size": 1695,
+        "perspective": "side-to-move",
+        "status": "tested-paper-inspired-adaptation",
+        "differences": [
+          "Directions use native axial order, not Beekeeper numbering.",
+          "Reference is the lowest stable tile ID among stationary adjacent/underlying pieces.",
+          "Occupied bounding box is centered independently for each symmetry.",
+          "Rule state and repetition history stay in the native object, outside the observation."
+        ]
+      }
+    },
+    "provenance": {
+      "git_commit": "0ccf45ba59d7c170181b81a5eb9c246690d53a74",
+      "git_dirty": true,
+      "source_sha256": "73c1fb34e13b3310fcfd3209c4c9982ab012a1591bc53d9a9293d802c0af2b0a",
+      "alpha_zero_general_commit": "f1a78e0505c614205f8c60eaa82cd644a07a84b3",
+      "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "torch": "2.11.0",
+      "numpy": "2.3.2",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "compiler": "Apple clang version 17.0.0 (clang-1700.6.4.2)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+      "build": "C++17, scikit-build-core Release, SFML disabled",
+      "accelerator": "CPU/MPS host"
+    },
+    "resume_granularity": "completed iteration; interrupted iteration is replayed",
+    "completed_iterations": 2
+  },
+  "checks": {
+    "python_passed": 33,
+    "cpp_passed": 169,
+    "cpp_existing_todo_skipped": 10,
+    "resume_bitwise_equal_to_uninterrupted_cpu_training": true,
+    "resume_after_failure_in_first_iteration": true,
+    "representation_suite_configs_generated": 50
+  },
+  "iterations": [
+    {
+      "iteration": "1",
+      "accepted": "True",
+      "examples": "348",
+      "self_play_seconds": "0.3172122079995461",
+      "training_seconds": "0.08495112502714619",
+      "arena_seconds": "0.13439933402696624",
+      "iteration_seconds": "0.5422932080109604",
+      "policy_loss": "7.340269044898022",
+      "value_loss": "1.0986931022556348",
+      "candidate_wins": "1",
+      "previous_wins": "1",
+      "draws": "0",
+      "random_win_rate": "0.0"
+    },
+    {
+      "iteration": "2",
+      "accepted": "True",
+      "examples": "696",
+      "self_play_seconds": "0.34547766705509275",
+      "training_seconds": "0.16368299996247515",
+      "arena_seconds": "0.1331985419965349",
+      "iteration_seconds": "0.648062625026796",
+      "policy_loss": "7.129966357658649",
+      "value_loss": "0.7835334916224425",
+      "candidate_wins": "1",
+      "previous_wins": "1",
+      "draws": "0",
+      "random_win_rate": "0.5"
+    }
+  ],
+  "earlier_tournament_smoke": {
+    "provenance": {
+      "git_commit": "0ccf45ba59d7c170181b81a5eb9c246690d53a74",
+      "git_dirty": true,
+      "source_sha256": "8332e1532c9753d5a8ad5dfde67161a5d4f59b539fa1308980563323c76e402b",
+      "alpha_zero_general_commit": "f1a78e0505c614205f8c60eaa82cd644a07a84b3",
+      "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+      "torch": "2.11.0",
+      "numpy": "2.3.2",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "compiler": "Apple clang version 17.0.0 (clang-1700.6.4.2)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+      "build": "C++17, scikit-build-core Release, SFML disabled",
+      "accelerator": "CPU/MPS host"
+    },
+    "note": "Same smoke configuration and deterministic weights; before newline-normalized source hashing was added.",
+    "games_per_pair": 2,
+    "pairs": [
+      {
+        "first": "trained",
+        "second": "untrained",
+        "wins": 0,
+        "losses": 2,
+        "draws": 0
+      },
+      {
+        "first": "trained",
+        "second": "random",
+        "wins": 2,
+        "losses": 0,
+        "draws": 0
+      },
+      {
+        "first": "trained",
+        "second": "minimax",
+        "wins": 0,
+        "losses": 2,
+        "draws": 0
+      },
+      {
+        "first": "trained",
+        "second": "rollout",
+        "wins": 1,
+        "losses": 1,
+        "draws": 0
+      },
+      {
+        "first": "untrained",
+        "second": "random",
+        "wins": 1,
+        "losses": 1,
+        "draws": 0
+      },
+      {
+        "first": "untrained",
+        "second": "minimax",
+        "wins": 0,
+        "losses": 2,
+        "draws": 0
+      },
+      {
+        "first": "untrained",
+        "second": "rollout",
+        "wins": 2,
+        "losses": 0,
+        "draws": 0
+      },
+      {
+        "first": "random",
+        "second": "minimax",
+        "wins": 0,
+        "losses": 2,
+        "draws": 0
+      },
+      {
+        "first": "random",
+        "second": "rollout",
+        "wins": 2,
+        "losses": 0,
+        "draws": 0
+      },
+      {
+        "first": "minimax",
+        "second": "rollout",
+        "wins": 2,
+        "losses": 0,
+        "draws": 0
+      }
+    ],
+    "speed_samples": [
+      {
+        "position": 0,
+        "repeat": 0,
+        "simulations": 2,
+        "seconds_per_move": 0.0006756249931640923,
+        "simulations_per_second": 2960.222046602486,
+        "position_key_sha256": "e6f2e92f98844c7c1c18479599f235a7f1b42f4aa62d48cf222093b91f723ce5",
+        "native_actions_from_start": []
+      },
+      {
+        "position": 0,
+        "repeat": 0,
+        "simulations": 4,
+        "seconds_per_move": 0.0012622500071302056,
+        "simulations_per_second": 3168.944327514181,
+        "position_key_sha256": "e6f2e92f98844c7c1c18479599f235a7f1b42f4aa62d48cf222093b91f723ce5",
+        "native_actions_from_start": []
+      },
+      {
+        "position": 1,
+        "repeat": 0,
+        "simulations": 2,
+        "seconds_per_move": 0.0007224169676192105,
+        "simulations_per_second": 2768.4842544482008,
+        "position_key_sha256": "118f8c52738765908ccd0ea564790ba17ccde068fd83cbe50a2ac0b4207edc4a",
+        "native_actions_from_start": [
+          {
+            "kind": "place",
+            "piece": "ant",
+            "to": [
+              0,
+              0
+            ],
+            "ordinal": 0
+          },
+          {
+            "kind": "place",
+            "piece": "grasshopper",
+            "to": [
+              0,
+              -1
+            ],
+            "ordinal": 0
+          },
+          {
+            "kind": "place",
+            "piece": "ant",
+            "to": [
+              -1,
+              1
+            ],
+            "ordinal": 1
+          },
+          {
+            "kind": "place",
+            "piece": "queen",
+            "to": [
+              -1,
+              -1
+            ],
+            "ordinal": 0
+          },
+          {
+            "kind": "place",
+            "piece": "beetle",
+            "to": [
+              -1,
+              2
+            ],
+            "ordinal": 0
+          },
+          {
+            "kind": "place",
+            "piece": "spider",
+            "to": [
+              1,
+              -2
+            ],
+            "ordinal": 0
+          }
+        ]
+      },
+      {
+        "position": 1,
+        "repeat": 0,
+        "simulations": 4,
+        "seconds_per_move": 0.002164584002457559,
+        "simulations_per_second": 1847.9301313594679,
+        "position_key_sha256": "118f8c52738765908ccd0ea564790ba17ccde068fd83cbe50a2ac0b4207edc4a",
+        "native_actions_from_start": [
+          {
+            "kind": "place",
+            "piece": "ant",
+            "to": [
+              0,
+              0
+            ],
+            "ordinal": 0
+          },
+          {
+            "kind": "place",
+            "piece": "grasshopper",
+            "to": [
+              0,
+              -1
+            ],
+            "ordinal": 0
+          },
+          {
+            "kind": "place",
+            "piece": "ant",
+            "to": [
+              -1,
+              1
+            ],
+            "ordinal": 1
+          },
+          {
+            "kind": "place",
+            "piece": "queen",
+            "to": [
+              -1,
+              -1
+            ],
+            "ordinal": 0
+          },
+          {
+            "kind": "place",
+            "piece": "beetle",
+            "to": [
+              -1,
+              2
+            ],
+            "ordinal": 0
+          },
+          {
+            "kind": "place",
+            "piece": "spider",
+            "to": [
+              1,
+              -2
+            ],
+            "ordinal": 0
+          }
+        ]
+      }
+    ]
+  }
+}

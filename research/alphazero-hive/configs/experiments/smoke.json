@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "cpu-smoke-not-paper-results",
+  "rules_config": "../rules/paper-modified.json",
+  "representation_config": "../representations/paper-hybrid.json",
+  "seed": 1,
+  "symmetries": true,
+  "search": {"simulations": 2, "cpuct": 0.8, "dirichlet_alpha": 0.3, "dirichlet_fraction": 0.25},
+  "network": {
+    "layers": 4, "channels": 4, "hidden": [32, 16], "dropout": 0.0,
+    "learning_rate": 0.001, "epochs": 1, "batch_size": 16, "device": "cpu"
+  },
+  "training": {
+    "iterations": 2, "self_play_games": 1, "temperature_threshold": 15,
+    "replay_iterations": 2, "max_examples": 2000,
+    "arena_games": 2, "promotion_threshold": 0.5, "random_games": 2, "max_seconds": 0
+  },
+  "runtime": {"threads": 1}
+}

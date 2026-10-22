@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "base-hive-256-ply-cap-adaptation",
+  "profile": "base",
+  "options": {
+    "queen_surround_count": 6,
+    "max_plies": 256,
+    "repetition_draw_occurrences": 3,
+    "black_wins_ties": false
+  },
+  "note": "Experimental cap: fewer neighbors around own queen wins; ties draw. This cap is not an official base-Hive rule."
+}

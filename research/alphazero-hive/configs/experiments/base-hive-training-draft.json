@@ -1,0 +1,5 @@
+{
+  "status": "superseded",
+  "replacement": "paper-inspired.json",
+  "reason": "The earlier 23-plane/1771-action draft did not describe the paper hybrid. Use smoke.json for pipeline validation or paper-inspired.json for the explicit adaptation."
+}
