@@ -1,0 +1,2160 @@
+{
+  "status": "reanalysis_completed",
+  "paper_replication": false,
+  "scope": "author aggregate data and printed equations only; no new experiments",
+  "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+  "figures_4_5": {
+    "absolute_coord/regular/original": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.43,
+        "std": 0.04
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.42,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.59,
+        "std": 0.13
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.58,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.61,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.69,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.71,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.74,
+        "std": 0.0
+      }
+    ],
+    "absolute_coord/regular/symmetric": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.52,
+        "std": 0.04
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.47,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.43,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.51,
+        "std": 0.04
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.47,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.44,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.52,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.55,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.5,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 10,
+        "contributing_runs": 2,
+        "mean_win_rate": 0.58,
+        "std": 0.08
+      },
+      {
+        "model_iteration": 11,
+        "contributing_runs": 2,
+        "mean_win_rate": 0.59,
+        "std": 0.01
+      },
+      {
+        "model_iteration": 12,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.58,
+        "std": 0.0
+      }
+    ],
+    "absolute_coord/regular/simple": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.44,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.43,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.45,
+        "std": 0.04
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.45,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.51,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.47,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.54,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.52,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 4,
+        "mean_win_rate": 0.52,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 10,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.51,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 11,
+        "contributing_runs": 2,
+        "mean_win_rate": 0.52,
+        "std": 0.01
+      }
+    ],
+    "absolute_coord/regular/spatial_planes": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.41,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.46,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.48,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.48,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.48,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.5,
+        "std": 0.08
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.49,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 4,
+        "mean_win_rate": 0.56,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.56,
+        "std": 0.12
+      },
+      {
+        "model_iteration": 10,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.56,
+        "std": 0.0
+      }
+    ],
+    "absolute_coord/regular/spatial_planes_4": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.51,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.48,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.51,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.49,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.58,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.56,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.62,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.6,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.6,
+        "std": 0.0
+      }
+    ],
+    "tile_relative/regular/original": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.42,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.43,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.42,
+        "std": 0.08
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.43,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.45,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.38,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.47,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.41,
+        "std": 0.02
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.36,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 10,
+        "contributing_runs": 2,
+        "mean_win_rate": 0.41,
+        "std": 0.11
+      },
+      {
+        "model_iteration": 11,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.34,
+        "std": 0.0
+      }
+    ],
+    "tile_relative/regular/symmetric": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.54,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.36,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.4,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.37,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.41,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.43,
+        "std": 0.04
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.46,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.51,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.5,
+        "std": 0.12
+      },
+      {
+        "model_iteration": 10,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.5,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 11,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.55,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 12,
+        "contributing_runs": 2,
+        "mean_win_rate": 0.55,
+        "std": 0.05
+      }
+    ],
+    "tile_relative/regular/simple": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.44,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.4,
+        "std": 0.04
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.4,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.41,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.41,
+        "std": 0.02
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.42,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.4,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.46,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.4,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 10,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.46,
+        "std": 0.11
+      },
+      {
+        "model_iteration": 11,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.46,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 12,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.43,
+        "std": 0.04
+      },
+      {
+        "model_iteration": 13,
+        "contributing_runs": 3,
+        "mean_win_rate": 0.39,
+        "std": 0.02
+      },
+      {
+        "model_iteration": 14,
+        "contributing_runs": 2,
+        "mean_win_rate": 0.42,
+        "std": 0.02
+      }
+    ],
+    "tile_relative/regular/spatial_planes": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.46,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.43,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.47,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.54,
+        "std": 0.12
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.52,
+        "std": 0.08
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.54,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.53,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.52,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.54,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 10,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.55,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 11,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.6,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 12,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.6,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 13,
+        "contributing_runs": 2,
+        "mean_win_rate": 0.6,
+        "std": 0.12
+      },
+      {
+        "model_iteration": 14,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.56,
+        "std": 0.0
+      },
+      {
+        "model_iteration": 15,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.57,
+        "std": 0.0
+      }
+    ],
+    "tile_relative/regular/spatial_planes_4": [
+      {
+        "model_iteration": 1,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.42,
+        "std": 0.03
+      },
+      {
+        "model_iteration": 2,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.42,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 3,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.45,
+        "std": 0.05
+      },
+      {
+        "model_iteration": 4,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.5,
+        "std": 0.08
+      },
+      {
+        "model_iteration": 5,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.46,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 6,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.48,
+        "std": 0.13
+      },
+      {
+        "model_iteration": 7,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.54,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 8,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.53,
+        "std": 0.11
+      },
+      {
+        "model_iteration": 9,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.53,
+        "std": 0.07
+      },
+      {
+        "model_iteration": 10,
+        "contributing_runs": 5,
+        "mean_win_rate": 0.53,
+        "std": 0.1
+      },
+      {
+        "model_iteration": 11,
+        "contributing_runs": 4,
+        "mean_win_rate": 0.61,
+        "std": 0.09
+      },
+      {
+        "model_iteration": 12,
+        "contributing_runs": 2,
+        "mean_win_rate": 0.6,
+        "std": 0.06
+      },
+      {
+        "model_iteration": 13,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.7,
+        "std": 0.0
+      },
+      {
+        "model_iteration": 14,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.54,
+        "std": 0.0
+      },
+      {
+        "model_iteration": 15,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.66,
+        "std": 0.0
+      },
+      {
+        "model_iteration": 16,
+        "contributing_runs": 1,
+        "mean_win_rate": 0.7,
+        "std": 0.0
+      }
+    ]
+  },
+  "figure_3_candidates": {
+    "spatial_planes": [
+      {
+        "epoch": 1,
+        "policy_mean": 5.56,
+        "value_mean": 1.0866
+      },
+      {
+        "epoch": 2,
+        "policy_mean": 4.918,
+        "value_mean": 0.8012
+      },
+      {
+        "epoch": 3,
+        "policy_mean": 4.736,
+        "value_mean": 0.7316
+      },
+      {
+        "epoch": 4,
+        "policy_mean": 4.5600000000000005,
+        "value_mean": 0.6354000000000001
+      },
+      {
+        "epoch": 5,
+        "policy_mean": 4.3020000000000005,
+        "value_mean": 0.5682
+      },
+      {
+        "epoch": 6,
+        "policy_mean": 4.03,
+        "value_mean": 0.4852
+      },
+      {
+        "epoch": 7,
+        "policy_mean": 3.804,
+        "value_mean": 0.4102
+      },
+      {
+        "epoch": 8,
+        "policy_mean": 3.642,
+        "value_mean": 0.4104
+      },
+      {
+        "epoch": 9,
+        "policy_mean": 3.506,
+        "value_mean": 0.3962
+      },
+      {
+        "epoch": 10,
+        "policy_mean": 3.37,
+        "value_mean": 0.3584
+      },
+      {
+        "epoch": 11,
+        "policy_mean": 4.07,
+        "value_mean": 0.74
+      },
+      {
+        "epoch": 12,
+        "policy_mean": 3.674,
+        "value_mean": 0.545
+      },
+      {
+        "epoch": 13,
+        "policy_mean": 3.406,
+        "value_mean": 0.4458
+      },
+      {
+        "epoch": 14,
+        "policy_mean": 3.178,
+        "value_mean": 0.4066
+      },
+      {
+        "epoch": 15,
+        "policy_mean": 2.9979999999999998,
+        "value_mean": 0.383
+      },
+      {
+        "epoch": 16,
+        "policy_mean": 2.882,
+        "value_mean": 0.3556
+      },
+      {
+        "epoch": 17,
+        "policy_mean": 2.778,
+        "value_mean": 0.3384
+      },
+      {
+        "epoch": 18,
+        "policy_mean": 2.68,
+        "value_mean": 0.32080000000000003
+      },
+      {
+        "epoch": 19,
+        "policy_mean": 2.568,
+        "value_mean": 0.3146
+      },
+      {
+        "epoch": 20,
+        "policy_mean": 2.522,
+        "value_mean": 0.2866
+      },
+      {
+        "epoch": 21,
+        "policy_mean": 2.878,
+        "value_mean": 0.4786
+      },
+      {
+        "epoch": 22,
+        "policy_mean": 2.636,
+        "value_mean": 0.376
+      },
+      {
+        "epoch": 23,
+        "policy_mean": 2.468,
+        "value_mean": 0.341
+      },
+      {
+        "epoch": 24,
+        "policy_mean": 2.348,
+        "value_mean": 0.3462
+      },
+      {
+        "epoch": 25,
+        "policy_mean": 2.252,
+        "value_mean": 0.319
+      },
+      {
+        "epoch": 26,
+        "policy_mean": 2.196,
+        "value_mean": 0.293
+      },
+      {
+        "epoch": 27,
+        "policy_mean": 2.1239999999999997,
+        "value_mean": 0.2864
+      },
+      {
+        "epoch": 28,
+        "policy_mean": 2.056,
+        "value_mean": 0.276
+      },
+      {
+        "epoch": 29,
+        "policy_mean": 2.028,
+        "value_mean": 0.2662
+      },
+      {
+        "epoch": 30,
+        "policy_mean": 1.99,
+        "value_mean": 0.26
+      },
+      {
+        "epoch": 31,
+        "policy_mean": 2.602,
+        "value_mean": 0.49560000000000004
+      },
+      {
+        "epoch": 32,
+        "policy_mean": 2.36,
+        "value_mean": 0.387
+      },
+      {
+        "epoch": 33,
+        "policy_mean": 2.214,
+        "value_mean": 0.3588
+      },
+      {
+        "epoch": 34,
+        "policy_mean": 2.066,
+        "value_mean": 0.3262
+      },
+      {
+        "epoch": 35,
+        "policy_mean": 2.036,
+        "value_mean": 0.306
+      },
+      {
+        "epoch": 36,
+        "policy_mean": 1.956,
+        "value_mean": 0.2942
+      },
+      {
+        "epoch": 37,
+        "policy_mean": 1.902,
+        "value_mean": 0.29960000000000003
+      },
+      {
+        "epoch": 38,
+        "policy_mean": 1.8579999999999999,
+        "value_mean": 0.3106
+      },
+      {
+        "epoch": 39,
+        "policy_mean": 1.8319999999999999,
+        "value_mean": 0.3018
+      },
+      {
+        "epoch": 40,
+        "policy_mean": 1.786,
+        "value_mean": 0.2754
+      },
+      {
+        "epoch": 41,
+        "policy_mean": 2.098,
+        "value_mean": 0.401
+      },
+      {
+        "epoch": 42,
+        "policy_mean": 1.928,
+        "value_mean": 0.3352
+      },
+      {
+        "epoch": 43,
+        "policy_mean": 1.8359999999999999,
+        "value_mean": 0.3118
+      },
+      {
+        "epoch": 44,
+        "policy_mean": 1.794,
+        "value_mean": 0.2948
+      },
+      {
+        "epoch": 45,
+        "policy_mean": 1.738,
+        "value_mean": 0.2818
+      },
+      {
+        "epoch": 46,
+        "policy_mean": 1.698,
+        "value_mean": 0.281
+      },
+      {
+        "epoch": 47,
+        "policy_mean": 1.688,
+        "value_mean": 0.2668
+      },
+      {
+        "epoch": 48,
+        "policy_mean": 1.666,
+        "value_mean": 0.2754
+      },
+      {
+        "epoch": 49,
+        "policy_mean": 1.622,
+        "value_mean": 0.2696
+      },
+      {
+        "epoch": 50,
+        "policy_mean": 1.608,
+        "value_mean": 0.25780000000000003
+      },
+      {
+        "epoch": 51,
+        "policy_mean": 1.936,
+        "value_mean": 0.372
+      },
+      {
+        "epoch": 52,
+        "policy_mean": 1.78,
+        "value_mean": 0.3066
+      },
+      {
+        "epoch": 53,
+        "policy_mean": 1.712,
+        "value_mean": 0.2894
+      },
+      {
+        "epoch": 54,
+        "policy_mean": 1.642,
+        "value_mean": 0.2778
+      },
+      {
+        "epoch": 55,
+        "policy_mean": 1.614,
+        "value_mean": 0.2798
+      },
+      {
+        "epoch": 56,
+        "policy_mean": 1.596,
+        "value_mean": 0.2666
+      },
+      {
+        "epoch": 57,
+        "policy_mean": 1.57,
+        "value_mean": 0.2632
+      },
+      {
+        "epoch": 58,
+        "policy_mean": 1.552,
+        "value_mean": 0.2682
+      },
+      {
+        "epoch": 59,
+        "policy_mean": 1.53,
+        "value_mean": 0.2624
+      },
+      {
+        "epoch": 60,
+        "policy_mean": 1.524,
+        "value_mean": 0.2542
+      },
+      {
+        "epoch": 61,
+        "policy_mean": 1.852,
+        "value_mean": 0.4124
+      },
+      {
+        "epoch": 62,
+        "policy_mean": 1.686,
+        "value_mean": 0.3232
+      },
+      {
+        "epoch": 63,
+        "policy_mean": 1.6099999999999999,
+        "value_mean": 0.3016
+      },
+      {
+        "epoch": 64,
+        "policy_mean": 1.572,
+        "value_mean": 0.29
+      },
+      {
+        "epoch": 65,
+        "policy_mean": 1.53,
+        "value_mean": 0.2828
+      },
+      {
+        "epoch": 66,
+        "policy_mean": 1.506,
+        "value_mean": 0.2818
+      },
+      {
+        "epoch": 67,
+        "policy_mean": 1.48,
+        "value_mean": 0.2736
+      },
+      {
+        "epoch": 68,
+        "policy_mean": 1.48,
+        "value_mean": 0.2706
+      },
+      {
+        "epoch": 69,
+        "policy_mean": 1.462,
+        "value_mean": 0.2616
+      },
+      {
+        "epoch": 70,
+        "policy_mean": 1.45,
+        "value_mean": 0.2622
+      },
+      {
+        "epoch": 71,
+        "policy_mean": 1.674,
+        "value_mean": 0.3582
+      },
+      {
+        "epoch": 72,
+        "policy_mean": 1.564,
+        "value_mean": 0.3038
+      },
+      {
+        "epoch": 73,
+        "policy_mean": 1.51,
+        "value_mean": 0.2846
+      },
+      {
+        "epoch": 74,
+        "policy_mean": 1.472,
+        "value_mean": 0.2778
+      },
+      {
+        "epoch": 75,
+        "policy_mean": 1.452,
+        "value_mean": 0.2734
+      },
+      {
+        "epoch": 76,
+        "policy_mean": 1.4260000000000002,
+        "value_mean": 0.2694
+      },
+      {
+        "epoch": 77,
+        "policy_mean": 1.42,
+        "value_mean": 0.2666
+      },
+      {
+        "epoch": 78,
+        "policy_mean": 1.4000000000000001,
+        "value_mean": 0.2634
+      },
+      {
+        "epoch": 79,
+        "policy_mean": 1.4040000000000001,
+        "value_mean": 0.2634
+      },
+      {
+        "epoch": 80,
+        "policy_mean": 1.4020000000000001,
+        "value_mean": 0.267
+      },
+      {
+        "epoch": 81,
+        "policy_mean": 1.648,
+        "value_mean": 0.33999999999999997
+      },
+      {
+        "epoch": 82,
+        "policy_mean": 1.528,
+        "value_mean": 0.297
+      },
+      {
+        "epoch": 83,
+        "policy_mean": 1.47,
+        "value_mean": 0.2746
+      },
+      {
+        "epoch": 84,
+        "policy_mean": 1.432,
+        "value_mean": 0.2648
+      },
+      {
+        "epoch": 85,
+        "policy_mean": 1.42,
+        "value_mean": 0.2654
+      },
+      {
+        "epoch": 86,
+        "policy_mean": 1.3960000000000001,
+        "value_mean": 0.2566
+      },
+      {
+        "epoch": 87,
+        "policy_mean": 1.396,
+        "value_mean": 0.262
+      },
+      {
+        "epoch": 88,
+        "policy_mean": 1.368,
+        "value_mean": 0.2568
+      },
+      {
+        "epoch": 89,
+        "policy_mean": 1.36,
+        "value_mean": 0.2482
+      },
+      {
+        "epoch": 90,
+        "policy_mean": 1.354,
+        "value_mean": 0.2522
+      },
+      {
+        "epoch": 91,
+        "policy_mean": 1.516,
+        "value_mean": 0.3088
+      },
+      {
+        "epoch": 92,
+        "policy_mean": 1.426,
+        "value_mean": 0.2778
+      },
+      {
+        "epoch": 93,
+        "policy_mean": 1.3880000000000001,
+        "value_mean": 0.2642
+      },
+      {
+        "epoch": 94,
+        "policy_mean": 1.36,
+        "value_mean": 0.2572
+      },
+      {
+        "epoch": 95,
+        "policy_mean": 1.342,
+        "value_mean": 0.2556
+      },
+      {
+        "epoch": 96,
+        "policy_mean": 1.338,
+        "value_mean": 0.259
+      },
+      {
+        "epoch": 97,
+        "policy_mean": 1.34,
+        "value_mean": 0.24980000000000002
+      },
+      {
+        "epoch": 98,
+        "policy_mean": 1.324,
+        "value_mean": 0.2504
+      },
+      {
+        "epoch": 99,
+        "policy_mean": 1.312,
+        "value_mean": 0.249
+      },
+      {
+        "epoch": 100,
+        "policy_mean": 1.31,
+        "value_mean": 0.2446
+      }
+    ],
+    "spatial_planes_4": [
+      {
+        "epoch": 1,
+        "policy_mean": 5.492,
+        "value_mean": 0.9854
+      },
+      {
+        "epoch": 2,
+        "policy_mean": 4.832,
+        "value_mean": 0.8008
+      },
+      {
+        "epoch": 3,
+        "policy_mean": 4.582,
+        "value_mean": 0.6912
+      },
+      {
+        "epoch": 4,
+        "policy_mean": 4.354,
+        "value_mean": 0.652
+      },
+      {
+        "epoch": 5,
+        "policy_mean": 4.208,
+        "value_mean": 0.614
+      },
+      {
+        "epoch": 6,
+        "policy_mean": 4.012,
+        "value_mean": 0.5458
+      },
+      {
+        "epoch": 7,
+        "policy_mean": 3.912,
+        "value_mean": 0.4932
+      },
+      {
+        "epoch": 8,
+        "policy_mean": 3.714,
+        "value_mean": 0.446
+      },
+      {
+        "epoch": 9,
+        "policy_mean": 3.644,
+        "value_mean": 0.434
+      },
+      {
+        "epoch": 10,
+        "policy_mean": 3.554,
+        "value_mean": 0.3914
+      },
+      {
+        "epoch": 11,
+        "policy_mean": 4.668,
+        "value_mean": 0.7878
+      },
+      {
+        "epoch": 12,
+        "policy_mean": 4.196,
+        "value_mean": 0.608
+      },
+      {
+        "epoch": 13,
+        "policy_mean": 3.932,
+        "value_mean": 0.5538
+      },
+      {
+        "epoch": 14,
+        "policy_mean": 3.73,
+        "value_mean": 0.5012
+      },
+      {
+        "epoch": 15,
+        "policy_mean": 3.57,
+        "value_mean": 0.449
+      },
+      {
+        "epoch": 16,
+        "policy_mean": 3.44,
+        "value_mean": 0.4416
+      },
+      {
+        "epoch": 17,
+        "policy_mean": 3.296,
+        "value_mean": 0.4034
+      },
+      {
+        "epoch": 18,
+        "policy_mean": 3.194,
+        "value_mean": 0.3732
+      },
+      {
+        "epoch": 19,
+        "policy_mean": 3.116,
+        "value_mean": 0.3652
+      },
+      {
+        "epoch": 20,
+        "policy_mean": 2.982,
+        "value_mean": 0.33440000000000003
+      },
+      {
+        "epoch": 21,
+        "policy_mean": 3.632,
+        "value_mean": 0.5778
+      },
+      {
+        "epoch": 22,
+        "policy_mean": 3.2800000000000002,
+        "value_mean": 0.466
+      },
+      {
+        "epoch": 23,
+        "policy_mean": 3.134,
+        "value_mean": 0.4364
+      },
+      {
+        "epoch": 24,
+        "policy_mean": 2.996,
+        "value_mean": 0.39740000000000003
+      },
+      {
+        "epoch": 25,
+        "policy_mean": 2.876,
+        "value_mean": 0.3618
+      },
+      {
+        "epoch": 26,
+        "policy_mean": 2.7680000000000002,
+        "value_mean": 0.354
+      },
+      {
+        "epoch": 27,
+        "policy_mean": 2.662,
+        "value_mean": 0.3404
+      },
+      {
+        "epoch": 28,
+        "policy_mean": 2.592,
+        "value_mean": 0.327
+      },
+      {
+        "epoch": 29,
+        "policy_mean": 2.5140000000000002,
+        "value_mean": 0.3266
+      },
+      {
+        "epoch": 30,
+        "policy_mean": 2.464,
+        "value_mean": 0.2998
+      },
+      {
+        "epoch": 31,
+        "policy_mean": 3.462,
+        "value_mean": 0.5542
+      },
+      {
+        "epoch": 32,
+        "policy_mean": 3.116,
+        "value_mean": 0.44880000000000003
+      },
+      {
+        "epoch": 33,
+        "policy_mean": 2.954,
+        "value_mean": 0.4098
+      },
+      {
+        "epoch": 34,
+        "policy_mean": 2.818,
+        "value_mean": 0.3854
+      },
+      {
+        "epoch": 35,
+        "policy_mean": 2.7,
+        "value_mean": 0.3636
+      },
+      {
+        "epoch": 36,
+        "policy_mean": 2.594,
+        "value_mean": 0.3362
+      },
+      {
+        "epoch": 37,
+        "policy_mean": 2.492,
+        "value_mean": 0.3364
+      },
+      {
+        "epoch": 38,
+        "policy_mean": 2.42,
+        "value_mean": 0.3204
+      },
+      {
+        "epoch": 39,
+        "policy_mean": 2.348,
+        "value_mean": 0.2974
+      },
+      {
+        "epoch": 40,
+        "policy_mean": 2.306,
+        "value_mean": 0.2962
+      },
+      {
+        "epoch": 41,
+        "policy_mean": 2.848,
+        "value_mean": 0.4682
+      },
+      {
+        "epoch": 42,
+        "policy_mean": 2.594,
+        "value_mean": 0.4174
+      },
+      {
+        "epoch": 43,
+        "policy_mean": 2.472,
+        "value_mean": 0.3544
+      },
+      {
+        "epoch": 44,
+        "policy_mean": 2.352,
+        "value_mean": 0.3312
+      },
+      {
+        "epoch": 45,
+        "policy_mean": 2.258,
+        "value_mean": 0.3192
+      },
+      {
+        "epoch": 46,
+        "policy_mean": 2.188,
+        "value_mean": 0.30419999999999997
+      },
+      {
+        "epoch": 47,
+        "policy_mean": 2.134,
+        "value_mean": 0.3
+      },
+      {
+        "epoch": 48,
+        "policy_mean": 2.092,
+        "value_mean": 0.2962
+      },
+      {
+        "epoch": 49,
+        "policy_mean": 2.056,
+        "value_mean": 0.2848
+      },
+      {
+        "epoch": 50,
+        "policy_mean": 2.0140000000000002,
+        "value_mean": 0.279
+      },
+      {
+        "epoch": 51,
+        "policy_mean": 2.394,
+        "value_mean": 0.3936
+      },
+      {
+        "epoch": 52,
+        "policy_mean": 2.192,
+        "value_mean": 0.3368
+      },
+      {
+        "epoch": 53,
+        "policy_mean": 2.134,
+        "value_mean": 0.3258
+      },
+      {
+        "epoch": 54,
+        "policy_mean": 2.04,
+        "value_mean": 0.2998
+      },
+      {
+        "epoch": 55,
+        "policy_mean": 1.992,
+        "value_mean": 0.2968
+      },
+      {
+        "epoch": 56,
+        "policy_mean": 1.95,
+        "value_mean": 0.2856
+      },
+      {
+        "epoch": 57,
+        "policy_mean": 1.9000000000000001,
+        "value_mean": 0.2746
+      },
+      {
+        "epoch": 58,
+        "policy_mean": 1.868,
+        "value_mean": 0.272
+      },
+      {
+        "epoch": 59,
+        "policy_mean": 1.83,
+        "value_mean": 0.2648
+      },
+      {
+        "epoch": 60,
+        "policy_mean": 1.812,
+        "value_mean": 0.2674
+      },
+      {
+        "epoch": 61,
+        "policy_mean": 2.034,
+        "value_mean": 0.3496
+      },
+      {
+        "epoch": 62,
+        "policy_mean": 1.912,
+        "value_mean": 0.311
+      },
+      {
+        "epoch": 63,
+        "policy_mean": 1.838,
+        "value_mean": 0.288
+      },
+      {
+        "epoch": 64,
+        "policy_mean": 1.786,
+        "value_mean": 0.2806
+      },
+      {
+        "epoch": 65,
+        "policy_mean": 1.766,
+        "value_mean": 0.2768
+      },
+      {
+        "epoch": 66,
+        "policy_mean": 1.722,
+        "value_mean": 0.2696
+      },
+      {
+        "epoch": 67,
+        "policy_mean": 1.7,
+        "value_mean": 0.2614
+      },
+      {
+        "epoch": 68,
+        "policy_mean": 1.686,
+        "value_mean": 0.2576
+      },
+      {
+        "epoch": 69,
+        "policy_mean": 1.68,
+        "value_mean": 0.2582
+      },
+      {
+        "epoch": 70,
+        "policy_mean": 1.654,
+        "value_mean": 0.2498
+      },
+      {
+        "epoch": 71,
+        "policy_mean": 1.988,
+        "value_mean": 0.3736
+      },
+      {
+        "epoch": 72,
+        "policy_mean": 1.818,
+        "value_mean": 0.3152
+      },
+      {
+        "epoch": 73,
+        "policy_mean": 1.764,
+        "value_mean": 0.2978
+      },
+      {
+        "epoch": 74,
+        "policy_mean": 1.708,
+        "value_mean": 0.2972
+      },
+      {
+        "epoch": 75,
+        "policy_mean": 1.664,
+        "value_mean": 0.2844
+      },
+      {
+        "epoch": 76,
+        "policy_mean": 1.64,
+        "value_mean": 0.2722
+      },
+      {
+        "epoch": 77,
+        "policy_mean": 1.6179999999999999,
+        "value_mean": 0.2706
+      },
+      {
+        "epoch": 78,
+        "policy_mean": 1.6,
+        "value_mean": 0.2652
+      },
+      {
+        "epoch": 79,
+        "policy_mean": 1.592,
+        "value_mean": 0.26739999999999997
+      },
+      {
+        "epoch": 80,
+        "policy_mean": 1.57,
+        "value_mean": 0.25680000000000003
+      },
+      {
+        "epoch": 81,
+        "policy_mean": 1.904,
+        "value_mean": 0.3744
+      },
+      {
+        "epoch": 82,
+        "policy_mean": 1.762,
+        "value_mean": 0.3236
+      },
+      {
+        "epoch": 83,
+        "policy_mean": 1.686,
+        "value_mean": 0.304
+      },
+      {
+        "epoch": 84,
+        "policy_mean": 1.6280000000000001,
+        "value_mean": 0.295
+      },
+      {
+        "epoch": 85,
+        "policy_mean": 1.604,
+        "value_mean": 0.2834
+      },
+      {
+        "epoch": 86,
+        "policy_mean": 1.576,
+        "value_mean": 0.2768
+      },
+      {
+        "epoch": 87,
+        "policy_mean": 1.568,
+        "value_mean": 0.2782
+      },
+      {
+        "epoch": 88,
+        "policy_mean": 1.548,
+        "value_mean": 0.2766
+      },
+      {
+        "epoch": 89,
+        "policy_mean": 1.544,
+        "value_mean": 0.264
+      },
+      {
+        "epoch": 90,
+        "policy_mean": 1.526,
+        "value_mean": 0.2602
+      },
+      {
+        "epoch": 91,
+        "policy_mean": 1.8239999999999998,
+        "value_mean": 0.364
+      },
+      {
+        "epoch": 92,
+        "policy_mean": 1.69,
+        "value_mean": 0.32239999999999996
+      },
+      {
+        "epoch": 93,
+        "policy_mean": 1.614,
+        "value_mean": 0.3062
+      },
+      {
+        "epoch": 94,
+        "policy_mean": 1.564,
+        "value_mean": 0.292
+      },
+      {
+        "epoch": 95,
+        "policy_mean": 1.546,
+        "value_mean": 0.2852
+      },
+      {
+        "epoch": 96,
+        "policy_mean": 1.52,
+        "value_mean": 0.2816
+      },
+      {
+        "epoch": 97,
+        "policy_mean": 1.5,
+        "value_mean": 0.276
+      },
+      {
+        "epoch": 98,
+        "policy_mean": 1.484,
+        "value_mean": 0.2706
+      },
+      {
+        "epoch": 99,
+        "policy_mean": 1.48,
+        "value_mean": 0.2692
+      },
+      {
+        "epoch": 100,
+        "policy_mean": 1.468,
+        "value_mean": 0.264
+      }
+    ]
+  },
+  "baseline_rows_with_fewer_than_50_decisive_games": [
+    {
+      "config": "absolute_coord/regular/original",
+      "run": 2,
+      "model_iteration": 5.0,
+      "wins": 27.0,
+      "losses": 22.0
+    },
+    {
+      "config": "absolute_coord/regular/original",
+      "run": 3,
+      "model_iteration": 6.0,
+      "wins": 37.0,
+      "losses": 12.0
+    },
+    {
+      "config": "absolute_coord/regular/original",
+      "run": 4,
+      "model_iteration": 4.0,
+      "wins": 31.0,
+      "losses": 18.0
+    },
+    {
+      "config": "absolute_coord/regular/original",
+      "run": 5,
+      "model_iteration": 4.0,
+      "wins": 25.0,
+      "losses": 24.0
+    },
+    {
+      "config": "absolute_coord/regular/symmetric",
+      "run": 2,
+      "model_iteration": 1.0,
+      "wins": 27.0,
+      "losses": 21.0
+    },
+    {
+      "config": "absolute_coord/regular/symmetric",
+      "run": 2,
+      "model_iteration": 2.0,
+      "wins": 24.0,
+      "losses": 25.0
+    },
+    {
+      "config": "absolute_coord/regular/symmetric",
+      "run": 2,
+      "model_iteration": 3.0,
+      "wins": 19.0,
+      "losses": 30.0
+    },
+    {
+      "config": "absolute_coord/regular/symmetric",
+      "run": 3,
+      "model_iteration": 4.0,
+      "wins": 25.0,
+      "losses": 24.0
+    },
+    {
+      "config": "absolute_coord/regular/symmetric",
+      "run": 4,
+      "model_iteration": 6.0,
+      "wins": 19.0,
+      "losses": 30.0
+    },
+    {
+      "config": "absolute_coord/regular/symmetric",
+      "run": 5,
+      "model_iteration": 8.0,
+      "wins": 24.0,
+      "losses": 24.0
+    },
+    {
+      "config": "absolute_coord/regular/simple",
+      "run": 1,
+      "model_iteration": 8.0,
+      "wins": 27.0,
+      "losses": 22.0
+    },
+    {
+      "config": "absolute_coord/regular/simple",
+      "run": 1,
+      "model_iteration": 11.0,
+      "wins": 25.0,
+      "losses": 24.0
+    },
+    {
+      "config": "absolute_coord/regular/simple",
+      "run": 2,
+      "model_iteration": 4.0,
+      "wins": 20.0,
+      "losses": 29.0
+    },
+    {
+      "config": "absolute_coord/regular/simple",
+      "run": 2,
+      "model_iteration": 9.0,
+      "wins": 27.0,
+      "losses": 22.0
+    },
+    {
+      "config": "absolute_coord/regular/simple",
+      "run": 3,
+      "model_iteration": 4.0,
+      "wins": 17.0,
+      "losses": 32.0
+    },
+    {
+      "config": "absolute_coord/regular/simple",
+      "run": 4,
+      "model_iteration": 2.0,
+      "wins": 22.0,
+      "losses": 27.0
+    },
+    {
+      "config": "absolute_coord/regular/simple",
+      "run": 5,
+      "model_iteration": 3.0,
+      "wins": 25.0,
+      "losses": 24.0
+    },
+    {
+      "config": "absolute_coord/regular/spatial_planes",
+      "run": 4,
+      "model_iteration": 9.0,
+      "wins": 19.0,
+      "losses": 30.0
+    },
+    {
+      "config": "absolute_coord/regular/spatial_planes_4",
+      "run": 3,
+      "model_iteration": 8.0,
+      "wins": 27.0,
+      "losses": 22.0
+    },
+    {
+      "config": "absolute_coord/regular/spatial_planes_4",
+      "run": 4,
+      "model_iteration": 3.0,
+      "wins": 18.0,
+      "losses": 31.0
+    },
+    {
+      "config": "absolute_coord/regular/spatial_planes_4",
+      "run": 4,
+      "model_iteration": 5.0,
+      "wins": 29.0,
+      "losses": 20.0
+    },
+    {
+      "config": "tile_relative/regular/original",
+      "run": 3,
+      "model_iteration": 4.0,
+      "wins": 19.0,
+      "losses": 29.0
+    },
+    {
+      "config": "tile_relative/regular/original",
+      "run": 3,
+      "model_iteration": 8.0,
+      "wins": 19.0,
+      "losses": 30.0
+    },
+    {
+      "config": "tile_relative/regular/original",
+      "run": 4,
+      "model_iteration": 2.0,
+      "wins": 17.0,
+      "losses": 32.0
+    },
+    {
+      "config": "tile_relative/regular/original",
+      "run": 5,
+      "model_iteration": 9.0,
+      "wins": 21.0,
+      "losses": 28.0
+    },
+    {
+      "config": "tile_relative/regular/symmetric",
+      "run": 3,
+      "model_iteration": 8.0,
+      "wins": 24.0,
+      "losses": 25.0
+    },
+    {
+      "config": "tile_relative/regular/symmetric",
+      "run": 4,
+      "model_iteration": 1.0,
+      "wins": 29.0,
+      "losses": 20.0
+    },
+    {
+      "config": "tile_relative/regular/symmetric",
+      "run": 5,
+      "model_iteration": 4.0,
+      "wins": 20.0,
+      "losses": 28.0
+    },
+    {
+      "config": "tile_relative/regular/symmetric",
+      "run": 5,
+      "model_iteration": 6.0,
+      "wins": 24.0,
+      "losses": 25.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 1,
+      "model_iteration": 4.0,
+      "wins": 22.0,
+      "losses": 27.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 1,
+      "model_iteration": 12.0,
+      "wins": 18.0,
+      "losses": 31.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 1,
+      "model_iteration": 14.0,
+      "wins": 19.0,
+      "losses": 30.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 2,
+      "model_iteration": 4.0,
+      "wins": 21.0,
+      "losses": 28.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 2,
+      "model_iteration": 9.0,
+      "wins": 22.0,
+      "losses": 26.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 3,
+      "model_iteration": 6.0,
+      "wins": 19.0,
+      "losses": 29.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 3,
+      "model_iteration": 10.0,
+      "wins": 25.0,
+      "losses": 24.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 3,
+      "model_iteration": 11.0,
+      "wins": 20.0,
+      "losses": 29.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 3,
+      "model_iteration": 12.0,
+      "wins": 21.0,
+      "losses": 28.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 4,
+      "model_iteration": 2.0,
+      "wins": 17.0,
+      "losses": 32.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 4,
+      "model_iteration": 12.0,
+      "wins": 22.0,
+      "losses": 27.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 5,
+      "model_iteration": 2.0,
+      "wins": 17.0,
+      "losses": 32.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 5,
+      "model_iteration": 5.0,
+      "wins": 20.0,
+      "losses": 29.0
+    },
+    {
+      "config": "tile_relative/regular/simple",
+      "run": 5,
+      "model_iteration": 11.0,
+      "wins": 21.0,
+      "losses": 28.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 1,
+      "model_iteration": 4.0,
+      "wins": 25.0,
+      "losses": 24.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 1,
+      "model_iteration": 7.0,
+      "wins": 27.0,
+      "losses": 22.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 2,
+      "model_iteration": 2.0,
+      "wins": 21.0,
+      "losses": 28.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 2,
+      "model_iteration": 9.0,
+      "wins": 33.0,
+      "losses": 16.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 2,
+      "model_iteration": 10.0,
+      "wins": 31.0,
+      "losses": 18.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 3,
+      "model_iteration": 10.0,
+      "wins": 27.0,
+      "losses": 22.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 3,
+      "model_iteration": 12.0,
+      "wins": 30.0,
+      "losses": 18.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 4,
+      "model_iteration": 15.0,
+      "wins": 28.0,
+      "losses": 21.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes",
+      "run": 5,
+      "model_iteration": 3.0,
+      "wins": 30.0,
+      "losses": 19.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes_4",
+      "run": 2,
+      "model_iteration": 8.0,
+      "wins": 23.0,
+      "losses": 26.0
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes_4",
+      "run": 4,
+      "model_iteration": 3.0,
+      "wins": 23.0,
+      "losses": 26.0
+    }
+  ],
+  "tournament": {
+    "games": 1500,
+    "games_per_engine": {
+      "4h": 500,
+      "untrained": 500,
+      "random": 500,
+      "nn": 500,
+      "mcts": 500,
+      "mm": 500
+    },
+    "wins": {
+      "4h": 205,
+      "nn": 288,
+      "mcts": 353,
+      "untrained": 92,
+      "mm": 434,
+      "random": 128
+    },
+    "all_15_pairs_match_generator": true
+  },
+  "cost_equations": {
+    "equation_1_minutes": 198360000.0,
+    "node_years_365_days": 377.3972602739726,
+    "gpu_integral_j": 5240000.0,
+    "cpu_integral_j": 1410000.0,
+    "total_integral_j": 6650000.0,
+    "exploration_mwh_using_paper_rounded_6_6MJ": 594.0,
+    "measurement_status": "arithmetic only; local CPU/GPU energy not measured"
+  },
+  "discrepancies": [
+    "Some random-baseline rows contain fewer than 50 decisive results; author plot divides wins by wins+losses, excluding unrecorded outcomes.",
+    "Paper states 400 games per engine; six engines and 100 games per opponent imply 500, as PGN confirms.",
+    "Author results_comparison.txt gives 4h vs MCTS as 27-100; generator and PGN encode 27-73.",
+    "Paper section 5.1 specifies hybrid input; plots_policy_value_loss defaults to spatial_planes (10 planes). Both series retained; figure identity unresolved.",
+    "Printed integral equations give 6.65 MJ combined, versus rounded 6.6 MJ in prose.",
+    "Equation (1) gives 198,360,000 minutes = 377.40 365-day node-years; the paper rounds to about 200 million minutes and reports 381 node-years.",
+    "324,000 runs times the paper's rounded 6.6 MJ gives 594 MWh; the paper reports 602.78 MWh. The arithmetic inputs behind that value remain unresolved."
+  ]
+}

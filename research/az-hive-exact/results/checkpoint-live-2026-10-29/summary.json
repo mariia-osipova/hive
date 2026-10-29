@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "scope": "fresh live games; no training or strength claim",
+  "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+  "native_build": {
+    "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "compiler": "gcc-15 (Homebrew GCC 15.2.0_1) 15.2.0",
+    "command": [
+      "/opt/homebrew/bin/gcc-15",
+      "-shared",
+      "-fPIC",
+      "-std=gnu99",
+      "-O3",
+      "-march=native",
+      "-fopenmp",
+      "-fcommon",
+      "-fsigned-char",
+      "-DCENTERED=1",
+      "-I",
+      "engine",
+      "engine/board.c",
+      "engine/list.c",
+      "engine/moves.c",
+      "engine/node.c",
+      "engine/tt.c",
+      "engine/utils.c",
+      "mm/mm.c",
+      "mm/evaluation.c",
+      "mcts/mcts.c",
+      "-lm",
+      "-o",
+      "/Users/maria/CLionProjects/hive/research/az-hive-exact/work/author/beekeeper/c/build/libhive.so"
+    ],
+    "library_sha256": "4c96127d6e81cc6b47115a55ddfaf409db4547784eabe7f2c887b23cf12b399e",
+    "compatibility_flags": {
+      "-fcommon": "Old GCC global-definition behavior",
+      "-fsigned-char": "Match Linux x86 default char signedness"
+    }
+  },
+  "seed": 20261029,
+  "started_utc": "2026-10-29T17:56:41.084305+00:00",
+  "rules": "author modified Hive: four-neighbor surround and original move limit/tie behavior",
+  "algorithms": [
+    "az-mcts",
+    "policy"
+  ],
+  "neural_weights": "user_supplied_checkpoint",
+  "checkpoint_sha256": "91203f4e70b97123524cd3456f8de77e519c854b1b62bd96d4caaf4dd71ee699",
+  "network_config": "nn_architecture/symmetries/4-layers/1",
+  "simulations": 25,
+  "training_performed": false,
+  "planned_games": 2,
+  "completed_games": [
+    {
+      "game": 1,
+      "white": "az-mcts",
+      "black": "policy",
+      "moves": 9,
+      "native_result": 2,
+      "winner": "black"
+    },
+    {
+      "game": 2,
+      "white": "az-mcts",
+      "black": "policy",
+      "moves": 9,
+      "native_result": 2,
+      "winner": "black"
+    }
+  ],
+  "legal_moves_checked": 18
+}

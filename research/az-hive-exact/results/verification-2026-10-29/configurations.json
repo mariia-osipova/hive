@@ -1,0 +1,137 @@
+{
+  "status": "passed",
+  "scope": "inference only; no training or strength claim",
+  "configurations": [
+    {
+      "config": "absolute_coord/regular/original/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 132642318,
+      "action_size": 7437,
+      "use_symmetries": false
+    },
+    {
+      "config": "absolute_coord/regular/symmetric/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 132642318,
+      "action_size": 7437,
+      "use_symmetries": false
+    },
+    {
+      "config": "absolute_coord/regular/simple/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 132642318,
+      "action_size": 7437,
+      "use_symmetries": false
+    },
+    {
+      "config": "absolute_coord/regular/spatial_planes/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 132663054,
+      "action_size": 7437,
+      "use_symmetries": false
+    },
+    {
+      "config": "absolute_coord/regular/spatial_planes_4/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 132649230,
+      "action_size": 7437,
+      "use_symmetries": false
+    },
+    {
+      "config": "tile_relative/regular/original/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 120876960,
+      "action_size": 1695,
+      "use_symmetries": false
+    },
+    {
+      "config": "tile_relative/regular/symmetric/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 120876960,
+      "action_size": 1695,
+      "use_symmetries": false
+    },
+    {
+      "config": "tile_relative/regular/simple/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 120876960,
+      "action_size": 1695,
+      "use_symmetries": false
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 120897696,
+      "action_size": 1695,
+      "use_symmetries": false
+    },
+    {
+      "config": "tile_relative/regular/spatial_planes_4/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 120883872,
+      "action_size": 1695,
+      "use_symmetries": false
+    },
+    {
+      "config": "nn_architecture/regular/4-layers/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 120883872,
+      "action_size": 1695,
+      "use_symmetries": false
+    },
+    {
+      "config": "nn_architecture/regular/6-layers/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 53775008,
+      "action_size": 1695,
+      "use_symmetries": false
+    },
+    {
+      "config": "nn_architecture/regular/8-layers/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 20220576,
+      "action_size": 1695,
+      "use_symmetries": false
+    },
+    {
+      "config": "nn_architecture/symmetries/4-layers/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 120883872,
+      "action_size": 1695,
+      "use_symmetries": true
+    },
+    {
+      "config": "nn_architecture/symmetries/6-layers/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 53775008,
+      "action_size": 1695,
+      "use_symmetries": true
+    },
+    {
+      "config": "nn_architecture/symmetries/8-layers/1",
+      "returncode": 0,
+      "status": "inference_check_passed",
+      "parameters": 20220576,
+      "action_size": 1695,
+      "use_symmetries": true
+    }
+  ],
+  "tested": 16,
+  "planned": 16,
+  "complete": true
+}

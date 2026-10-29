@@ -1,5 +1,40 @@
 # Original AZ-Hive reproduction
 
+**Setup audit (2026-10-29): original source and runtime verified.** Training is
+stopped and left for manual execution. See [algorithm checks and research status](REPLICATION_STATUS.md)
+and [autoresearch gates](program_autoresearch.md). Full-paper experimental
+replication is a separate, unfinished task.
+
+## Play and check algorithms without training
+
+```sh
+# Interactive terminal: human white vs the original rollout MCTS black
+make -C research/az-hive-exact live
+# Or choose minimax, az-mcts, policy, random
+make -C research/az-hive-exact live ALGORITHM=minimax
+# Every automated agent plays random in both colors; all actions checked
+make -C research/az-hive-exact smoke
+```
+
+Algorithms: random, native minimax, native rollout MCTS (`mcts`), neural-guided
+AlphaZero MCTS (`az-mcts`), and masked neural policy (`policy`). Neural agents
+start with explicitly untrained seeded weights unless a checkpoint is provided.
+These commands never train. They use the original author's **modified Hive
+rules**, independently of the static browser game.
+
+For a saved model or automated match, run the CLI directly:
+
+```sh
+research/az-hive-exact/.venv/bin/python research/az-hive-exact/scripts/play_live.py \
+  --white az-mcts --black minimax --games 2 \
+  --checkpoint /absolute/path/to/best.pth.tar \
+  --output research/az-hive-exact/runs/my-match
+```
+
+Future manual training: `make -C research/az-hive-exact train`. This is the only
+Make target that starts training. `make setup` installs the pinned environment
+and rebuilds native code; `make verify` checks source identity and regressions.
+
 This workspace uses the original [AZ-Hive implementation](https://github.com/ddgoede/alphazero-hive/tree/17e45e6b27db7591f64f11f2af83c3b59c3c126b)
 for [the ICPE 2022 paper](https://research.spec.org/icpe_proceedings/2022/proceedings/p145.pdf).
 The earlier `research/alphazero-hive-reproduction` branch contains an adaptation and a small pilot;

@@ -1,0 +1,35 @@
+{
+  "status": "screen_passed",
+  "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+  "source_files_verified": 647,
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "seeds": [
+    20261022,
+    20261023,
+    20261024
+  ],
+  "games": 48,
+  "states": 974,
+  "all_trajectories_replayed": true,
+  "one_ply_tactical_cases": 147,
+  "independent_terminal_oracle_matches": 974,
+  "codec_round_trips": 974,
+  "rotation_checks": 5844,
+  "reflection_checks": 974,
+  "sizes": {
+    "verbose_bytes": 767413,
+    "compact_bytes": 199118,
+    "zlib_bytes": 220208
+  },
+  "verbose_to_compact_byte_ratio": 3.854061410821724,
+  "verbose_to_zlib_byte_ratio": 3.4849460510063213,
+  "synthetic_clock_key_collision": true,
+  "elapsed_seconds": 1.6973669579601847,
+  "limits": [
+    "Modified author rules, not standard full Hive",
+    "Byte savings are not token savings or reasoning gains",
+    "Clock intervention is synthetic, not a reachable-history proof",
+    "No trained policy or LLM results in this report"
+  ]
+}

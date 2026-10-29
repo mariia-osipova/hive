@@ -7,7 +7,7 @@ import subprocess
 import tarfile
 from pathlib import Path
 
-from verify_source import ROOT, verify
+from verify_source import ROOT, REBUILT_FILES, verify, verify_worktree
 
 
 def main():
@@ -27,8 +27,9 @@ def main():
             if not target.exists():
                 target.write_bytes(data)
                 target.chmod(member.mode & 0o777)
-            elif target.read_bytes() != data and target.suffix in {".py", ".c", ".h"}:
-                raise RuntimeError(f"Original source was modified: {relative}")
+            elif str(relative) not in REBUILT_FILES and target.read_bytes() != data:
+                raise RuntimeError(f"Original extracted file was modified: {relative}")
+    verify_worktree(lock)
     candidates = sorted(Path("/opt/homebrew/bin").glob("gcc-[0-9]*"), reverse=True)
     compiler = next((p for p in candidates if p.name.removeprefix("gcc-").isdigit()), None)
     if compiler is None:

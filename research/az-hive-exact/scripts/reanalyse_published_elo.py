@@ -4,11 +4,11 @@ import json
 import subprocess
 import tarfile
 
-from verify_source import ROOT, verify
+from verify_source import ROOT, verify_worktree
 
 
 def main():
-    verify()
+    verify_worktree()
     lock = json.loads((ROOT / "upstream/bayeselo.lock.json").read_text())
     archive = ROOT / "upstream" / lock["archive"]
     if hashlib.sha256(archive.read_bytes()).hexdigest() != lock["sha256"]:
