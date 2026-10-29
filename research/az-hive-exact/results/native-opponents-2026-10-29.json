@@ -1,0 +1,114 @@
+{
+  "status": "passed",
+  "scope": "four action checks, not a tournament or strength result",
+  "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+  "native_build": {
+    "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "compiler": "gcc-15 (Homebrew GCC 15.2.0_1) 15.2.0",
+    "command": [
+      "/opt/homebrew/bin/gcc-15",
+      "-shared",
+      "-fPIC",
+      "-std=gnu99",
+      "-O3",
+      "-march=native",
+      "-fopenmp",
+      "-fcommon",
+      "-fsigned-char",
+      "-DCENTERED=1",
+      "-I",
+      "engine",
+      "engine/board.c",
+      "engine/list.c",
+      "engine/moves.c",
+      "engine/node.c",
+      "engine/tt.c",
+      "engine/utils.c",
+      "mm/mm.c",
+      "mm/evaluation.c",
+      "mcts/mcts.c",
+      "-lm",
+      "-o",
+      "/Users/maria/CLionProjects/hive/research/az-hive-exact/work/author/beekeeper/c/build/libhive.so"
+    ],
+    "library_sha256": "4c96127d6e81cc6b47115a55ddfaf409db4547784eabe7f2c887b23cf12b399e",
+    "compatibility_flags": {
+      "-fcommon": "Old GCC global-definition behavior",
+      "-fsigned-char": "Match Linux x86 default char signedness"
+    }
+  },
+  "cases": [
+    {
+      "method": "minimax",
+      "ply": 8,
+      "prefix_actions": [
+        702,
+        873,
+        749,
+        330,
+        136,
+        48,
+        319,
+        391
+      ],
+      "selected_action": 341,
+      "legal": true,
+      "seconds": 1.0195039159734733
+    },
+    {
+      "method": "minimax",
+      "ply": 9,
+      "prefix_actions": [
+        702,
+        873,
+        749,
+        330,
+        136,
+        48,
+        319,
+        391,
+        433
+      ],
+      "selected_action": 433,
+      "legal": true,
+      "seconds": 1.9965472079929896
+    },
+    {
+      "method": "mcts",
+      "ply": 8,
+      "prefix_actions": [
+        702,
+        873,
+        749,
+        330,
+        136,
+        48,
+        319,
+        391
+      ],
+      "selected_action": 706,
+      "legal": true,
+      "seconds": 0.9953034169739112
+    },
+    {
+      "method": "mcts",
+      "ply": 9,
+      "prefix_actions": [
+        702,
+        873,
+        749,
+        330,
+        136,
+        48,
+        319,
+        391,
+        433
+      ],
+      "selected_action": 370,
+      "legal": true,
+      "seconds": 0.9980324169737287
+    }
+  ]
+}

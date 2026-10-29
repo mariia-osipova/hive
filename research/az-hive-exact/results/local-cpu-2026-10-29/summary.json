@@ -1,0 +1,145 @@
+{
+  "status": "incomplete",
+  "published_config": "nn_architecture/symmetries/4-layers/1",
+  "original_run_status": "stopped_by_user",
+  "completed_training_iterations": 0,
+  "recorded_optimization_epochs": 0,
+  "full_paper_replication": false,
+  "checkpoint_files": [
+    {
+      "filename": "initial.pth.tar",
+      "bytes": 483623813,
+      "sha256": "18f3565e0fcc8b8d82941c4d73b58f855e243c9c1811ae62cf78eaaf7af9c7af",
+      "uploaded": false
+    }
+  ],
+  "limitations": [
+    "One local configuration cannot reproduce the full multi-run study",
+    "No fresh six-engine tournament or energy measurement in this export",
+    "Checkpoints do not preserve optimizer, RNG or self-play history"
+  ],
+  "metadata": {
+    "status": "stopped_by_user",
+    "pid": 49260,
+    "started_utc": "2026-10-29T17:49:16.561983+00:00",
+    "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+    "published_config": "nn_architecture/symmetries/4-layers/1",
+    "seed": 20261029,
+    "original_seeds": "not published; this seed is a new local repetition",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+    "torch": "2.14.1",
+    "numpy": "2.3.2",
+    "device": "cpu",
+    "torch_threads": 4,
+    "action_size": 1695,
+    "parameters": 120883872,
+    "use_symmetries": true,
+    "published_training": {
+      "numIters": 20,
+      "numEps": 100,
+      "tempThreshold": 15,
+      "updateThreshold": 0.5,
+      "maxlenOfQueue": 200000,
+      "numMCTSSims": 25,
+      "arenaCompare": 40,
+      "cpuct": 0.8,
+      "checkpoint": "./temp/",
+      "load_model": false,
+      "load_folder_file": [
+        "./temp/",
+        "best.pth.tar"
+      ],
+      "numItersForTrainExamplesHistory": 5,
+      "results": "xperiment_results"
+    },
+    "published_network": {
+      "lr": 0.001,
+      "dropout": 0.3,
+      "epochs": 10,
+      "batch_size": 64,
+      "cuda": true,
+      "num_channels": 256,
+      "data_representation_method": 4,
+      "num_layers": 4,
+      "results": "xperiment_results"
+    },
+    "effective_training": {
+      "numIters": 20,
+      "numEps": 100,
+      "tempThreshold": 15,
+      "updateThreshold": 0.5,
+      "maxlenOfQueue": 200000,
+      "numMCTSSims": 25,
+      "arenaCompare": 40,
+      "cpuct": 0.8,
+      "checkpoint": "/Users/maria/CLionProjects/hive/research/az-hive-exact/runs/original-symmetric-4layer-2026-10-29/checkpoints",
+      "load_model": false,
+      "load_folder_file": [
+        "./temp/",
+        "best.pth.tar"
+      ],
+      "numItersForTrainExamplesHistory": 5,
+      "results": "/Users/maria/CLionProjects/hive/research/az-hive-exact/runs/original-symmetric-4layer-2026-10-29"
+    },
+    "effective_network": {
+      "lr": 0.001,
+      "dropout": 0.3,
+      "epochs": 10,
+      "batch_size": 64,
+      "cuda": false,
+      "num_channels": 256,
+      "data_representation_method": 4,
+      "num_layers": 4,
+      "results": "/Users/maria/CLionProjects/hive/research/az-hive-exact/runs/original-symmetric-4layer-2026-10-29"
+    },
+    "environment_differences": [
+      "macOS arm64 CPU instead of Linux/NVIDIA CUDA",
+      "modern Python/PyTorch/NumPy"
+    ],
+    "compatibility_shims": {
+      "numpy.str": "builtin str, as in the author's old NumPy"
+    },
+    "algorithm_source_edits": [],
+    "native_build": {
+      "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "compiler": "gcc-15 (Homebrew GCC 15.2.0_1) 15.2.0",
+      "command": [
+        "/opt/homebrew/bin/gcc-15",
+        "-shared",
+        "-fPIC",
+        "-std=gnu99",
+        "-O3",
+        "-march=native",
+        "-fopenmp",
+        "-fcommon",
+        "-fsigned-char",
+        "-DCENTERED=1",
+        "-I",
+        "engine",
+        "engine/board.c",
+        "engine/list.c",
+        "engine/moves.c",
+        "engine/node.c",
+        "engine/tt.c",
+        "engine/utils.c",
+        "mm/mm.c",
+        "mm/evaluation.c",
+        "mcts/mcts.c",
+        "-lm",
+        "-o",
+        "/Users/maria/CLionProjects/hive/research/az-hive-exact/work/author/beekeeper/c/build/libhive.so"
+      ],
+      "library_sha256": "4c96127d6e81cc6b47115a55ddfaf409db4547784eabe7f2c887b23cf12b399e",
+      "compatibility_flags": {
+        "-fcommon": "Old GCC global-definition behavior",
+        "-fsigned-char": "Match Linux x86 default char signedness"
+      }
+    },
+    "error": "KeyboardInterrupt()",
+    "stop_reason": "User clarified training is to be run manually later",
+    "stopped_utc": "2026-10-29T17:55:41.779106+00:00"
+  }
+}

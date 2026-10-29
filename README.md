@@ -21,3 +21,10 @@ and movement for the main Hive pieces.
 The placement sound is loaded from
 `sounds/ElevenLabs_satisfying_card_flip_asmr.mp3`. Add that file before
 deploying if audio is needed.
+
+## Research
+
+The [AZ-Hive replication audit](research/az-hive-exact/REPLICATION_STATUS.md)
+separates verified original code, completed checks and unfinished paper
+experiments. The [hypothesis overlap review](research/hive-paper-lab/RESEARCH_STATUS.md)
+records related work and limits on novelty claims.

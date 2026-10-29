@@ -1,0 +1,154 @@
+{
+  "status": "passed",
+  "scope": "bounded_original_code_integration_check",
+  "paper_replication": false,
+  "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+  "source_files_verified": 647,
+  "native_build": {
+    "author_commit": "17e45e6b27db7591f64f11f2af83c3b59c3c126b",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "compiler": "gcc-15 (Homebrew GCC 15.2.0_1) 15.2.0",
+    "command": [
+      "/opt/homebrew/bin/gcc-15",
+      "-shared",
+      "-fPIC",
+      "-std=gnu99",
+      "-O3",
+      "-march=native",
+      "-fopenmp",
+      "-fcommon",
+      "-fsigned-char",
+      "-DCENTERED=1",
+      "-I",
+      "engine",
+      "engine/board.c",
+      "engine/list.c",
+      "engine/moves.c",
+      "engine/node.c",
+      "engine/tt.c",
+      "engine/utils.c",
+      "mm/mm.c",
+      "mm/evaluation.c",
+      "mcts/mcts.c",
+      "-lm",
+      "-o",
+      "/Users/maria/CLionProjects/hive/research/az-hive-exact/work/author/beekeeper/c/build/libhive.so"
+    ],
+    "library_sha256": "4c96127d6e81cc6b47115a55ddfaf409db4547784eabe7f2c887b23cf12b399e",
+    "compatibility_flags": {
+      "-fcommon": "Old GCC global-definition behavior",
+      "-fsigned-char": "Match Linux x86 default char signedness"
+    }
+  },
+  "started_utc": "2026-10-29T17:35:12.652204+00:00",
+  "seed": 20261029,
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.6 (v3.12.6:a4a2d2b0d85, Sep  6 2024, 16:08:03) [Clang 13.0.0 (clang-1300.0.29.30)]",
+  "torch": "2.14.1",
+  "numpy": "2.3.2",
+  "threads": 4,
+  "device": "cpu",
+  "published_config": "nn_architecture/symmetries/4-layers/1",
+  "published_training": {
+    "numIters": 20,
+    "numEps": 100,
+    "tempThreshold": 15,
+    "updateThreshold": 0.5,
+    "maxlenOfQueue": 200000,
+    "numMCTSSims": 25,
+    "arenaCompare": 40,
+    "cpuct": 0.8,
+    "checkpoint": "./temp/",
+    "load_model": false,
+    "load_folder_file": [
+      "./temp/",
+      "best.pth.tar"
+    ],
+    "numItersForTrainExamplesHistory": 5,
+    "results": "xperiment_results"
+  },
+  "published_network": {
+    "lr": 0.001,
+    "dropout": 0.3,
+    "epochs": 10,
+    "batch_size": 64,
+    "cuda": true,
+    "num_channels": 256,
+    "data_representation_method": 4,
+    "num_layers": 4,
+    "results": "xperiment_results"
+  },
+  "parameters": 120883872,
+  "algorithm_source_edits": [],
+  "compatibility_shims": {
+    "numpy.str": "builtin str"
+  },
+  "deviations": [
+    "one self-play episode instead of 100 per iteration",
+    "train on first 64 augmented examples only",
+    "two trained-versus-random games; no Coach.learn acceptance loop",
+    "macOS arm64 CPU and modern Python/PyTorch/NumPy"
+  ],
+  "self_play_examples": 348,
+  "self_play_seconds": 7.671244791010395,
+  "optimization_epochs": 10,
+  "optimizer_steps": 10,
+  "training_examples": 64,
+  "value_head_weights_changed": true,
+  "policy_value_losses": [
+    [
+      7.56,
+      1.16
+    ],
+    [
+      6.49,
+      0.565
+    ],
+    [
+      5.52,
+      1.64
+    ],
+    [
+      4.84,
+      1.69
+    ],
+    [
+      4.68,
+      1.19
+    ],
+    [
+      4.44,
+      1.18
+    ],
+    [
+      4.12,
+      1.06
+    ],
+    [
+      4.04,
+      1.32
+    ],
+    [
+      4.08,
+      0.896
+    ],
+    [
+      3.85,
+      1.06
+    ]
+  ],
+  "checkpoint": {
+    "bytes": 483624133,
+    "sha256": "91203f4e70b97123524cd3456f8de77e519c854b1b62bd96d4caaf4dd71ee699",
+    "prediction_round_trip_exact": true,
+    "uploaded": false
+  },
+  "arena": {
+    "games": 2,
+    "random_wins": 1,
+    "trained_wins": 1,
+    "draws": 0
+  },
+  "elapsed_seconds": 26.20795408298727
+}

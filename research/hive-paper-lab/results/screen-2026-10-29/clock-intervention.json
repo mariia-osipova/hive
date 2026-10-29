@@ -1,0 +1,107 @@
+[
+  {
+    "kind": "synthetic_clock_intervention_not_reachability_certified",
+    "source_state": {
+      "ply": 9,
+      "to_move": "black",
+      "reserve": {
+        "white": {
+          "ant": 2,
+          "grasshopper": 3,
+          "beetle": 2,
+          "spider": 0,
+          "queen": 0
+        },
+        "black": {
+          "ant": 3,
+          "grasshopper": 1,
+          "beetle": 2,
+          "spider": 1,
+          "queen": 0
+        }
+      },
+      "pieces": [
+        {
+          "id": "bG1",
+          "color": "black",
+          "kind": "grasshopper",
+          "x": 14,
+          "y": 13,
+          "z": 0
+        },
+        {
+          "id": "bG2",
+          "color": "black",
+          "kind": "grasshopper",
+          "x": 14,
+          "y": 14,
+          "z": 0
+        },
+        {
+          "id": "bQ1",
+          "color": "black",
+          "kind": "queen",
+          "x": 15,
+          "y": 13,
+          "z": 0
+        },
+        {
+          "id": "bS1",
+          "color": "black",
+          "kind": "spider",
+          "x": 13,
+          "y": 12,
+          "z": 0
+        },
+        {
+          "id": "wA1",
+          "color": "white",
+          "kind": "ant",
+          "x": 12,
+          "y": 14,
+          "z": 0
+        },
+        {
+          "id": "wQ1",
+          "color": "white",
+          "kind": "queen",
+          "x": 11,
+          "y": 13,
+          "z": 0
+        },
+        {
+          "id": "wS1",
+          "color": "white",
+          "kind": "spider",
+          "x": 12,
+          "y": 12,
+          "z": 0
+        },
+        {
+          "id": "wS2",
+          "color": "white",
+          "kind": "spider",
+          "x": 11,
+          "y": 12,
+          "z": 0
+        }
+      ]
+    },
+    "source_actions": [
+      546,
+      1030,
+      656,
+      543,
+      540,
+      324,
+      550,
+      330,
+      1
+    ],
+    "source_terminal": 0,
+    "changed_ply": 29,
+    "changed_terminal": 2,
+    "author_key_collides": true,
+    "turn_aware_key_collides": false
+  }
+]
