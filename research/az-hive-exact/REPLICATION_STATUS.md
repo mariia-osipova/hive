@@ -21,6 +21,7 @@ DOI 10.1145/3489525.3511685, and [preserved author commit](https://github.com/dd
 | Arena | Two games finish, one win each against random | Integration only; no strength inference |
 | Native opponents | Minimax and rollout MCTS return legal actions at plies 8 and 9 | Execution for both player parities |
 | Live algorithm suite | Eight complete games, 168 checked legal moves; minimax, rollout MCTS, neural MCTS and policy each face random in both colors | Every automated algorithm exercised without training |
+| Saved checkpoint live play | Two further neural MCTS vs policy games; 18 legal moves | Provided-checkpoint mode works without optimization |
 | State screen | 48 games, 974 states, 147 tactical cases; all replay/codec/geometry checks pass | Deterministic local rule checks |
 | Published data | Ten representation series and both candidate loss series recomputed; independent aggregation matches author plotting functions | Reanalysis only |
 | Published Elo | Default advantage matches six rounded ratings; zero advantage differs | Calculation only, no fresh tournament |

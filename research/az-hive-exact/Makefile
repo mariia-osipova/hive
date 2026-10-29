@@ -19,6 +19,7 @@ setup:
 
 verify:
 	$(PYTHON) scripts/test_fidelity.py
+	$(PYTHON) scripts/replay_live.py results/live-algorithms-2026-10-29 results/checkpoint-live-2026-10-29
 
 live:
 	$(PYTHON) -u scripts/play_live.py --white human --black $(ALGORITHM) --output $(OUT)
